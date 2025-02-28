@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-profile-card',
+  standalone: true,
+  imports: [],
+
+  
   templateUrl: './profile-card.component.html',
   styleUrls: ['./profile-card.component.scss']
 })
