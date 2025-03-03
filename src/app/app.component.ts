@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { ProfileService } from './data/services/profile.service';
 import { ProfileCardComponent } from './common-ui/profile-card/profile-card.component';
 import { CommonModule } from '@angular/common';
+import { Profile } from './data/intefaces/profile.interface';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,11 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent { 
   profileService = inject(ProfileService);
-  profiles: any = []
+  profiles: Profile[] = []
+
+  trackById(index: number, profile: Profile) {
+    return profile.id;
+  }
 
   constructor() {
     this.profileService.getTestAccounts()

@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Profile } from '../intefaces/profile.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,6 @@ export class ProfileService {
   constructor() { }
 
   getTestAccounts() {
-    return this.http.get( `${this.baseApiUrl}account/test_accounts`)
+    return this.http.get<Profile[]>( `${this.baseApiUrl}account/test_accounts`)
   }
 }

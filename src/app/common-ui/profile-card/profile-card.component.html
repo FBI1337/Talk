@@ -1,9 +1,9 @@
- <div class="profile-card">
+<div *ngIf="profile" class="profile-card">
     <div class="avatar-name">
         <img src="assets/imgs/Img.png" alt="avatar" class="profile-card__avatar">
 
         <div class="profile-card__name">
-            <strong class="h6">Елена Головач</strong>
+            <strong class="h6">{{ profile.firstName }} {{ profile.lastName }}</strong>
             <span class="subtitle">golovach</span>
         </div>
     </div>
