@@ -1,23 +1,23 @@
 <div *ngIf="profile" class="profile-card">
     <div class="avatar-name">
-        <img src="assets/imgs/Img.png" alt="avatar" class="profile-card__avatar">
+        <img
+        [src]="profile.avatarUrl | imgUrl"
+        [alt]="profile.lastName"
+        class="profile-card__avatar"
+        >
 
         <div class="profile-card__name">
             <strong class="h6">{{ profile.firstName }} {{ profile.lastName }}</strong>
-            <span class="subtitle">golovach</span>
+            <span class="subtitle">{{ profile.username }}</span>
         </div>
     </div>
 
     <div class="profile-card__description">
-        Список навыков, который мы обсудили выше, — основа резюме, но не единственная его часть. Также можно рассказать о себе в классическом смысле — этот раздел можно добавить в сопроводительное письмо.
+        {{ profile.description}}
     </div>
 
     <div class="profile-card__tags">
-        <div class="skill-tag">Angular</div>
-        <div class="skill-tag">HTML</div>
-        <div class="skill-tag">JS</div>
-        <div class="skill-tag">TypeScript</div>
-        <div class="skill-tag">React</div>
+        <div *ngFor="let skill of profile.stack; trackBy: trackBySkill" class="skill-tag">{{ skill }}</div>
     </div>
     <div class="profile-card__action-btns">
         <button class="btn">Подписаться</button>

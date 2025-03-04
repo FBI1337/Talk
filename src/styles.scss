@@ -8,21 +8,31 @@
     --primary-color: #AE7AFF;
 }
 
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
 body {
     font-family: 'JetBrains Mono', sans-serif;
     background-color: var(--dark-color);
     color: var(--light-color);
+    background-image: url(assets/imgs/background.jpg);
 }
 
 .skill-tag {
-    padding: 4px 8px;
+    padding: 0 8px;
     border-radius: 4px;
     border: 1px solid var(--light-color);
     display: inline;
     font-size: 12px;
     font-weight: 700;
     line-height: 24px;
-    margin-right: 4px;
+    height: 24px;
 }
 
 .btn {
@@ -35,6 +45,12 @@ body {
     line-height: 24px;
 }
 
+.h1 { 
+    font-size: 48px;
+    line-height: 56px;
+    font-weight: 800;
+}
+
 .h6 {
     font-size: 18px;
     line-height: 24px;
@@ -44,4 +60,22 @@ body {
 .subtitle { 
     font-size: 14px;
     line-height: 20px;
+}
+
+.tt-control-label {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.tt-input {
+    display: block;
+    border: 1px solid var(--light-color);
+    border-radius: 4px;
+    padding: 12px 20px;
+    background: var(--dark-color);
+    font-size: 14px;
+    line-height:  21px;
+    font-family: 'JetBrains Mono', sans-serif;
+    color: var(--light-color);
 }
