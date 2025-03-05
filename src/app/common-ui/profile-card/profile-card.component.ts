@@ -5,13 +5,11 @@ import { ProfileService } from 'src/app/data/services/profile.service';
 import { ImgUrlPipe } from 'src/app/helpers/pipes/img-url.pipe';
 
 @Component({
-  selector: 'app-profile-card',
-  standalone: true,
-  imports: [NgIf, CommonModule, ImgUrlPipe],
-
-  
-  templateUrl: './profile-card.component.html',
-  styleUrls: ['./profile-card.component.scss']
+    selector: 'app-profile-card',
+    standalone: true,
+    imports: [NgIf, CommonModule, ImgUrlPipe],
+    templateUrl: './profile-card.component.html',
+    styleUrls: ['./profile-card.component.scss']
 })
 export class ProfileCardComponent {
   @Input() profile!: Profile;

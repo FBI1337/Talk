@@ -15,7 +15,7 @@
     <div class="profile-card__description">
         {{ profile.description}}
     </div>
-
+    
     <div class="profile-card__tags">
         <div *ngFor="let skill of profile.stack; trackBy: trackBySkill" class="skill-tag">{{ skill }}</div>
     </div>
