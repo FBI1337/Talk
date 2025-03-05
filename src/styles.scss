@@ -1,11 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'fonts.scss';
+@import 'margins.scss';
 
 
 :root {
     --dark-color: #000000;
     --light-color: #ffffff;
     --primary-color: #AE7AFF;
+    --gray-color: #5F646D;
 }
 
 
@@ -24,6 +26,10 @@ body {
     background-image: url(assets/imgs/background.jpg);
 }
 
+img {
+    user-select: none;
+}
+
 .skill-tag {
     padding: 0 8px;
     border-radius: 4px;
@@ -36,6 +42,7 @@ body {
 }
 
 .btn {
+    width: 100%;    
     border: none;
     background: var(--primary-color);
     color: var(--dark-color);
@@ -43,6 +50,24 @@ body {
     font-weight: 700;
     font-size: 14px;
     line-height: 24px;
+    border-radius: 4px;
+    border: 1px solid var(--dark-color);
+}
+
+.btn-shadow{
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        bottom: -4px;
+        right: -4px;
+        width: 100%;
+        height: 100%;
+        background: var(--gray-color);
+        border-radius: 4px;
+    }
 }
 
 .h1 { 
@@ -66,14 +91,18 @@ body {
     font-weight: 700;
     font-size: 12px;
     line-height: 16px;
+    display: block;
 }
 
 .tt-input {
+    width: 100%;
+    margin-top: 8px;
     display: block;
     border: 1px solid var(--light-color);
     border-radius: 4px;
     padding: 12px 20px;
     background: var(--dark-color);
+    font-weight: 400;
     font-size: 14px;
     line-height:  21px;
     font-family: 'JetBrains Mono', sans-serif;
