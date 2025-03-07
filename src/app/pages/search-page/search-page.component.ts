@@ -6,7 +6,11 @@ import { ProfileService } from 'src/app/data/services/profile.service';
 
 @Component({
     selector: 'app-search-page',
-    imports: [ProfileCardComponent, CommonModule],
+    standalone: true,
+    imports: [
+      ProfileCardComponent,
+      CommonModule
+    ],
     templateUrl: './search-page.component.html',
     styleUrls: ['./search-page.component.scss']
 })

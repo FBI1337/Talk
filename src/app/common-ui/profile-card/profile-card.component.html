@@ -1,4 +1,6 @@
-<div *ngIf="profile" class="profile-card">
+
+@if (profile) {
+<div class="profile-card">
     <div class="avatar-name">
         <img
         [src]="profile.avatarUrl | imgUrl"
@@ -15,11 +17,15 @@
     <div class="profile-card__description">
         {{ profile.description}}
     </div>
-    
+
     <div class="profile-card__tags">
-        <div *ngFor="let skill of profile.stack; trackBy: trackBySkill" class="skill-tag">{{ skill }}</div>
+        @for (skill of profile.stack; track skill) {
+        <div class="skill-tag">{{ skill }}</div>
+        }
     </div>
+
     <div class="profile-card__action-btns">
         <button class="btn">Подписаться</button>
     </div>
  </div>
+}
