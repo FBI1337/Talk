@@ -8,6 +8,7 @@
     --light-color: #ffffff;
     --primary-color: #AE7AFF;
     --gray-color: #5F646D;
+    --darck-hover-color: #2c2c2c;
 }
 
 
@@ -84,6 +85,20 @@ img {
 
 .subtitle { 
     font-size: 14px;
+    line-height: 20px;
+}
+
+.medium-text {
+    font-family: "JetBrains Mono", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+}
+
+.regular {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
     line-height: 20px;
 }
 
