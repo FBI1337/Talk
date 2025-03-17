@@ -5,7 +5,7 @@ class="ml16 mb20"
 >
 
 <nav>
-    <ul class="main-menu-list">
+    <ul class="main-menu-list mb20">
         <li *ngFor="let menuItem of menuItems">
             <a class="menu-item" [routerLink]="[menuItem.link]">
                 <svg [icon]="menuItem.icon || 'default-icon'"></svg>
@@ -17,3 +17,15 @@ class="ml16 mb20"
 
 
 <p class="medium-text mb20">Подписчики</p>
+
+<pre>{{ subscribers$ | async }}</pre>
+
+<!-- <app-subscriber-card></app-subscriber-card> -->
+
+<div class="mt20 to-subscribers">
+    <a
+    [routerLink]="['/subscribers']"
+    class="to-subscribers-link"
+    >Все подписчики</a>
+    <svg icon="arrow" class="to-subscribers-icon"></svg>
+</div>

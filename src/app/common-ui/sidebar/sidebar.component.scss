@@ -25,6 +25,7 @@
     width: 100%;
     text-align: left;
     border-radius: 2px;
+    text-decoration: none;
 
 
 
@@ -43,4 +44,21 @@
 .menu-item svg {
     width: 16px;
     height: 16px;
+}
+
+.to-subscribers {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+
+.to-subscribers-link {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.to-subscribers-icon { 
+    width: 18px;
+    height: 18px;
 }
