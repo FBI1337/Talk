@@ -1,0 +1,19 @@
+<img
+src="assets/svg/logo-small.svg"
+alt=""
+class="ml16 mb20"
+>
+
+<nav>
+    <ul class="main-menu-list">
+        <li *ngFor="let menuItem of menuItems">
+            <a class="menu-item" [routerLink]="[menuItem.link]">
+                <svg [icon]="menuItem.icon || 'default-icon'"></svg>
+                <span>{{ menuItem.label }}</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+
+<p class="medium-text mb20">Подписчики</p>
