@@ -14,5 +14,4 @@ import { ProfileService } from 'src/app/data/services/profile.service';
     styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent {
-    profileService = inject(ProfileService)
 }

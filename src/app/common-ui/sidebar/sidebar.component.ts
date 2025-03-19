@@ -17,6 +17,7 @@ import { firstValueFrom } from 'rxjs';
     SubscriberCardComponent,
     AsyncPipe,
     JsonPipe,
+    ImgUrlPipe
 ],
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.scss']
@@ -24,8 +25,9 @@ import { firstValueFrom } from 'rxjs';
 export class SidebarComponent {
 
     profileService = inject(ProfileService)
-
     subscribers$ = this.profileService.getSubscribersShortList()
+
+    me = this.profileService.me
 
     menuItems = [
         {
@@ -47,6 +49,6 @@ export class SidebarComponent {
     ]
 
     ngOnInit() {
-        firstValueFrom(this.profileService.getMe())
+        firstValueFrom(this.profileService.getMe())        
     }
 }
