@@ -10,21 +10,23 @@ import { map, tap } from 'rxjs';
 export class ProfileService {
 
   http: HttpClient = inject(HttpClient);
-
   baseApiUrl = 'https://icherniakov.ru/yt-course/'
-
   me = signal<Profile | null>(null)
 
   constructor() { }
 
+
+  //запрос на сервер для получения списка всех тестовых аккаунтов
   getTestAccounts() {
     return this.http.get<Profile[]>( `${this.baseApiUrl}account/test_accounts`)
   }
 
+  //запрос на сервер для получения списка всех аккаунтов
   getAccount(id: string) {
     return this.http.get<Profile>(`${this.baseApiUrl}account/${id}`)
   }
 
+  //запрос на сервер для получения своего аккаунта
   getMe() {
     return this.http.get<Profile>(`${this.baseApiUrl}account/me`)
     .pipe(
@@ -32,6 +34,8 @@ export class ProfileService {
     )
   }
 
+
+  //запрос на сервер для получения списка подписчиков
   getSubscribersShortList() {
     return this.http.get<Pageble<Profile>>(`${this.baseApiUrl}account/subscribers/`)
     .pipe(
@@ -39,10 +43,10 @@ export class ProfileService {
     )
   }
 
-  patchProfile(profile: Partial<Profile>) {
-    return this.http.patch<Profile>(
-      `${this.baseApiUrl}account/me`,
-      profile
-    )
-  }
+  // patchProfile(profile: Partial<Profile>) {
+  //   return this.http.patch<Profile>(
+  //     `${this.baseApiUrl}account/me`,
+  //     profile
+  //   )
+  // }
 }
