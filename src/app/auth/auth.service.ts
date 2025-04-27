@@ -39,6 +39,20 @@ export class AuthService {
     )
   }
 
+  register(payload: { username: string, password: string}) {
+    const fd = new FormData();
+
+    fd.append('username', payload.username)
+    fd.append('password', payload.password)
+
+    return this.http.post<TokenResponse>(
+      `${this.baseApiUrl}login`,
+      fd,
+    ).pipe(
+      tap(val => this.saveTokens(val))
+    )
+  }
+
   refreshAuthToken() {
     return this.http.post<TokenResponse>(
       `${this.baseApiUrl}refresh`,

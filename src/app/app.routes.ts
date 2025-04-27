@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
@@ -13,6 +14,7 @@ export const routes: Routes = [
         ],
         canActivate: [canActivateAuth],
     },
-    {path: 'login', component: LoginPageComponent}
+    {path: 'login', component: LoginPageComponent},
+    {path: 'register', component: RegisterPageComponent}
 ];
 

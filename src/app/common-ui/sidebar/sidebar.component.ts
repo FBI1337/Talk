@@ -16,7 +16,6 @@ import { firstValueFrom } from 'rxjs';
     RouterLink,
     SubscriberCardComponent,
     AsyncPipe,
-    JsonPipe,
     ImgUrlPipe
 ],
     templateUrl: './sidebar.component.html',
