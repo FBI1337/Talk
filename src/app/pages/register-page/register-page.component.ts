@@ -21,6 +21,8 @@ export class RegisterPageComponent {
   isSubmitted = signal<boolean>(false);
 
   form = new FormGroup({
+    firstName: new FormControl<string | null>(null, Validators.required),
+    lastName: new FormControl<string | null>(null, Validators.required),
     username: new FormControl<string | null>(null, Validators.required),
     password: new FormControl<string | null>(null, Validators.required),
     confirmPassword: new FormControl<string | null>(null, Validators.required),

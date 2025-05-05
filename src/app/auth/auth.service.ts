@@ -12,7 +12,7 @@ export class AuthService {
   http = inject(HttpClient)
   router = inject(Router)
   cookieService = inject(CookieService)
-  baseApiUrl = 'https://icherniakov.ru/yt-course/auth/'
+  baseApiUrl = 'https://schelkunov.xn--80ahdri7a.site/'
 
   token: string | null = null;
   refreshToken: string | null = null;
@@ -39,14 +39,17 @@ export class AuthService {
     )
   }
 
-  register(payload: { username: string, password: string}) {
+  register(payload: { username: string, firstName: string, lastName: string, password: string}) {
     const fd = new FormData();
 
+
+    fd.append('firstName', payload.firstName)
+    fd.append('lastName', payload.lastName)
     fd.append('username', payload.username)
     fd.append('password', payload.password)
 
     return this.http.post<TokenResponse>(
-      `${this.baseApiUrl}login`,
+      `${this.baseApiUrl}auth/register`,
       fd,
     ).pipe(
       tap(val => this.saveTokens(val))
