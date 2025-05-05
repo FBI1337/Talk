@@ -10,3 +10,4 @@ export interface Profile {
     city: string,
     description: string,
 }
+        
