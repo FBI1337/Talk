@@ -39,13 +39,14 @@ export class AuthService {
     )
   }
 
-  register(payload: { username: string, firstName: string, lastName: string, password: string}) {
+  register(payload: { username: string, firstName: string, lastName: string, email:string, password: string}) {
     const fd = new FormData();
 
 
     fd.append('firstName', payload.firstName)
     fd.append('lastName', payload.lastName)
     fd.append('username', payload.username)
+    fd.append('email', payload.email)
     fd.append('password', payload.password)
 
     return this.http.post<TokenResponse>(
