@@ -12,7 +12,7 @@ export class AuthService {
   http = inject(HttpClient)
   router = inject(Router)
   cookieService = inject(CookieService)
-  baseApiUrl = 'talk-backend-pl5h.vercel.app/'
+  baseApiUrl = 'https://talk-backend-pl5h.vercel.app/'
 
   token: string | null = null;
   refreshToken: string | null = null;
