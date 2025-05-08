@@ -12,7 +12,7 @@ export class AuthService {
   http = inject(HttpClient)
   router = inject(Router)
   cookieService = inject(CookieService)
-  baseApiUrl = 'http://localhost:8000/'
+  baseApiUrl = 'http://schelkunov.xn--80ahdri7a.site/index.php/'
 
   token: string | null = null;
   refreshToken: string | null = null;
