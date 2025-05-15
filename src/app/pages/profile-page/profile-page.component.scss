@@ -2,6 +2,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 24px;
+}
+
+.to-settings-btn {
+    width: 190px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .to-settings-icon {
@@ -9,6 +18,60 @@
     height: 16px;
 }
 
-.btn {
-    text-decoration: none;
+.profile-page__body {
+    display: grid;
+    grid-gap: 64px;
+    grid-template-columns: 1fr 360px;
+    padding: 24px;    
+}
+
+.subscribers-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.subscriber-avatar-btn {
+    width: 36px;
+    height: 36px;
+    img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+    }
+}
+
+
+.to-subscribers-search {
+    border-radius: 50%;
+    background: var(--light-color);
+    width: 16px;
+    height: 16px;
+    position: relative;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        width: 2px;
+        height: 8px;
+        background: var(--dark-color);
+        top: 50%;
+        left: 50%;
+    }
+
+    &::before {
+        transform: translateY(-50%) translateX(-50%);
+    }
+
+    &::after {
+        transform: translateY(-50%) translateX(-50%) rotate(90deg);
+    }
+}
+
+
+.stack-wrapper {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
 }

@@ -1,0 +1,24 @@
+:host { 
+    display: grid;
+    grid-gap: 48px;
+    grid-template-columns: 322px 1fr;
+    padding: 24px;
+}
+
+.profile-form {
+    padding: 32px;
+    border: 1px solid var(--light-color);
+    background: var(--dark-color);
+    display: grid;
+    grid-gap: 20px;
+}
+
+.two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.pofile-lable {
+    
+}

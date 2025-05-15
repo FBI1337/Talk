@@ -30,9 +30,9 @@ export class SidebarComponent {
 
     menuItems = [
         {
-            label: 'Моя страницв',
+            label: 'Моя страница',
             icon: 'home',
-            link: ''
+            link: '/profile/me'
         },
         {
             label: 'Чаты',

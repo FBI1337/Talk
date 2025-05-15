@@ -1,3 +1,4 @@
+// handler страницы регистрации
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -13,11 +14,15 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrl: './register-page.component.scss'
 })
 export class RegisterPageComponent {
+  // Инициализация обращения к Frontend-а к Backend-у
   authService = inject(AuthService);
+  // Инициализация к перенаправлению на страницу входа
   router = inject(Router);
 
+  // Настройка функции для отображения пароля
   isPasswordVisible = signal<boolean>(false);
   isConfirmPasswordVisible = signal<boolean>(false);
+  // Настройка функции для отправки после нажатой кнопки "Зарегистрироваться"
   isSubmitted = signal<boolean>(false);
 
   form = new FormGroup({
@@ -48,7 +53,4 @@ export class RegisterPageComponent {
       })
     }
   }
-
-
-
 }

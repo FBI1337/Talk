@@ -12,6 +12,7 @@ export class AuthService {
   http = inject(HttpClient)
   router = inject(Router)
   cookieService = inject(CookieService)
+  notmybackend = 'https://icherniakov.ru/yt-course/auth/'
   baseApiUrl = 'https://schelkunov.xn--80ahdri7a.site/index.php/'
 
   token: string | null = null;
@@ -32,7 +33,7 @@ export class AuthService {
     fd.append('password', payload.password)
 
     return this.http.post<TokenResponse>(
-      `${this.baseApiUrl}token`,
+      `${this.notmybackend}token`,
       fd,
     ).pipe(
       tap(val => this.saveTokens(val))
@@ -59,7 +60,7 @@ export class AuthService {
 
   refreshAuthToken() {
     return this.http.post<TokenResponse>(
-      `${this.baseApiUrl}refresh`,
+      `${this.notmybackend}refresh`,
       {
         refresh_token: this.refreshToken,
       }

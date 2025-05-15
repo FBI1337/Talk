@@ -4,8 +4,10 @@ import { ProfileService } from 'src/app/data/services/profile.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop'; 
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, JsonPipe, NgForOf } from '@angular/common';
 import { SvgIconComponent } from "../../common-ui/svg-icon/svg-icon.component";
+import { ImgUrlPipe } from 'src/app/helpers/pipes/img-url.pipe';
+import { PostFeedComponent } from './post-feed/post-feed.component';
 
 @Component({
     selector: 'app-profile-page',
@@ -15,6 +17,8 @@ import { SvgIconComponent } from "../../common-ui/svg-icon/svg-icon.component";
     AsyncPipe,
     SvgIconComponent,
     RouterLink,
+    ImgUrlPipe,
+    PostFeedComponent,
 ],
     templateUrl: './profile-page.component.html',
     styleUrls: ['./profile-page.component.scss'],
@@ -24,6 +28,7 @@ export class ProfilePageComponent {
     route = inject(ActivatedRoute)
 
     me$ = toObservable(this.profileService.me)
+    subscribers$ = this.profileService.getSubscribersShortList(5)
 
     profile$ = this.route.params
     .pipe (
