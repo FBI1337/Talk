@@ -1,8 +1,53 @@
 <app-profile-header
 ></app-profile-header>
 
-<form class="profile-form">
-    <div class="two-columns">
-        
+<form class="profile-form__wrapper" [formGroup]="form">
+    <div class="profile-form">
+        <div class="two-columns">
+            <label class="tt-form-label">
+                <span class="tt-form-label__text">Имя</span>
+                <input type="text" class="tt-form-input" formControlName="firstName">
+            </label>
+    
+             <label class="tt-form-label">
+                <span class="tt-form-label__text">Фамилия</span>
+                <input type="text" class="tt-form-input" formControlName="lastName">
+            </label>
+        </div>
+    
+    
+        <label class="tt-form-label">
+            <span class="tt-form-label__text">Telegram username</span>
+            <input type="text" class="tt-form-input" formControlName="username">
+        </label>
+    
+        <label class="tt-form-label">
+            <span class="tt-form-label__text">О себе</span>
+            <textarea
+            formControlName="description"
+            class="tt-form-input tt-textarea"
+            ></textarea>
+        </label>
+    
+         <label class="tt-form-label">
+            <span class="tt-form-label__text">Навыки (стэк)</span>
+            <input type="text" class="tt-form-input" formControlName="stack">
+        </label>
     </div>
+
+    <div class="profile-form__buttons">
+        <div class="btn-left">
+            <button class="btn-border">
+                <svg icon="bin"></svg>
+            </button>
+            <button class="btn-border ml20">
+                <svg icon="logout"></svg>
+            </button>
+        </div>
+        <div class="btn-right">
+            <button class="btn-border">Отмена</button>
+            <button class="btn ml20">Сохранить</button>
+        </div>
+    </div>
+    
 </form>

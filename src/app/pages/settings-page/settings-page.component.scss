@@ -5,10 +5,18 @@
     padding: 24px;
 }
 
-.profile-form {
-    padding: 32px;
+
+.profile-form__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border: 1px solid var(--light-color);
     background: var(--dark-color);
+    padding: 32px;
+    height: calc(100dvh - (24px * 4));
+}
+
+.profile-form {
     display: grid;
     grid-gap: 20px;
 }
@@ -19,6 +27,27 @@
     grid-gap: 20px;
 }
 
-.pofile-lable {
-    
+.profile-form__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.btn-left {
+    display: flex;
+    height: 44px;
+    align-items: center;
+    svg {
+        width: 13px;
+        height: 13px;
+        text-decoration: none;
+    }
+
+    button {
+        padding: 10px 14px;
+    }
+}
+
+.btn-right {
+    display: flex;
 }
