@@ -33,7 +33,7 @@ export class AuthService {
     fd.append('password', payload.password)
 
     return this.http.post<TokenResponse>(
-      `${this.notmybackend}token`,
+      `${this.baseApiUrl}token`,
       fd,
     ).pipe(
       tap(val => this.saveTokens(val))
@@ -60,7 +60,7 @@ export class AuthService {
 
   refreshAuthToken() {
     return this.http.post<TokenResponse>(
-      `${this.notmybackend}refresh`,
+      `${this.baseApiUrl}refresh`,
       {
         refresh_token: this.refreshToken,
       }
