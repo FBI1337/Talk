@@ -13,7 +13,7 @@ export class AuthService {
   router = inject(Router)
   cookieService = inject(CookieService)
   notmybackend = 'https://icherniakov.ru/yt-course/auth/'
-  baseApiUrl = 'https://schelkunov.xn--80ahdri7a.site/index.php/'
+  baseApiUrl = 'https://talk-backend-betatest.onrender.com/'
 
   token: string | null = null;
   refreshToken: string | null = null;
