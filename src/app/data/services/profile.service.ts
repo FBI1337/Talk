@@ -24,7 +24,7 @@ export class ProfileService {
 
   //запрос на сервер для получения списка всех аккаунтов
   getAccount(id: string) {
-    return this.http.get<Profile>(`${this.notmybackend}account/${id}`)
+    return this.http.get<Profile>(`${this.baseApiUrl}account/${id}`)
   }
 
   //запрос на сервер для получения своего аккаунта
@@ -38,7 +38,7 @@ export class ProfileService {
 
   //запрос на сервер для получения списка подписчиков
   getSubscribersShortList(subsAmount = 3) {
-    return this.http.get<Pageble<Profile>>(`${this.notmybackend}account/subscribers/`)
+    return this.http.get<Pageble<Profile>>(`${this.baseApiUrl}account/subscribers/`)
     .pipe(
       map( res => res.items.slice(0, subsAmount))
     )
