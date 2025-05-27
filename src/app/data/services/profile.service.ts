@@ -10,7 +10,8 @@ import { map, tap } from 'rxjs';
 export class ProfileService {
 
   http: HttpClient = inject(HttpClient);
-  baseApiUrl = 'https://icherniakov.ru/yt-course/'
+  notmybackend = 'https://icherniakov.ru/yt-course/auth/'
+  baseApiUrl = 'https://talk-backend-betatest.onrender.com/'
   me = signal<Profile | null>(null)
 
   constructor() { }
@@ -18,12 +19,12 @@ export class ProfileService {
 
   //запрос на сервер для получения списка всех тестовых аккаунтов
   getTestAccounts() {
-    return this.http.get<Profile[]>( `${this.baseApiUrl}account/test_accounts`)
+    return this.http.get<Profile[]>( `${this.notmybackend}account/test_accounts`)
   }
 
   //запрос на сервер для получения списка всех аккаунтов
   getAccount(id: string) {
-    return this.http.get<Profile>(`${this.baseApiUrl}account/${id}`)
+    return this.http.get<Profile>(`${this.notmybackend}account/${id}`)
   }
 
   //запрос на сервер для получения своего аккаунта
@@ -37,7 +38,7 @@ export class ProfileService {
 
   //запрос на сервер для получения списка подписчиков
   getSubscribersShortList(subsAmount = 3) {
-    return this.http.get<Pageble<Profile>>(`${this.baseApiUrl}account/subscribers/`)
+    return this.http.get<Pageble<Profile>>(`${this.notmybackend}account/subscribers/`)
     .pipe(
       map( res => res.items.slice(0, subsAmount))
     )
