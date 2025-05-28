@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectorRef } from '@angular/core';
 import { ProfileHeaderComponent } from "../../common-ui/profile-header/profile-header.component";
 import { ProfileService } from 'src/app/data/services/profile.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -28,6 +28,8 @@ export class ProfilePageComponent {
     profileService = inject(ProfileService)
     route = inject(ActivatedRoute)
 
+    private cdr = inject(ChangeDetectorRef);
+
     me$ = toObservable(this.profileService.me)
     subscribers$ = this.profileService.getSubscribersShortList(5)
 
@@ -38,9 +40,18 @@ export class ProfilePageComponent {
     .pipe (
         switchMap(({ id }) => {
             this.currentProfileId = id;
-            const profile$ = id === 'me'
+
+            const profile$ = id === 'me' 
             ?  this.me$
             : this.profileService.getAccount(id);
+
+
+            if (id !== 'me') {
+                this.profileService.checkIfSubscribed(id).subscribe(res => {
+                    this.isSubscribed = res.subscribed;
+                    this.cdr.detectChanges();
+                })
+            }
 
             return profile$
         })
@@ -54,15 +65,14 @@ export class ProfilePageComponent {
     toggleFollow() {
         if (!this.currentProfileId || this.currentProfileId === 'me') return;
 
-        if (this.isSubscribed) {
-            this.profileService.unfollowUser(this.currentProfileId).subscribe(() => {
-                this.isSubscribed = false;
-            })
-        } else {
-            this.profileService.followUser(this.currentProfileId).subscribe(() => {
-                this.isSubscribed = true;
-            })
-        }
+        const action$ = this.isSubscribed
+        ? this.profileService.unfollowUser(this.currentProfileId)
+        : this.profileService.followUser(this.currentProfileId);
+
+        action$.subscribe(() => {
+            this.isSubscribed = !this.isSubscribed;
+            this.cdr.detectChanges();
+        })
     }
 
 
