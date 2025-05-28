@@ -44,8 +44,16 @@ export class ProfileService {
     )
   }
 
-  followUser(id: string) {
-    return this.http.post(`${this.baseApiUrl}follow/${id}`, {});
+  followUser(targetId: string) {
+    const currentUserId = localStorage.getItem('userId');
+
+    if (!currentUserId) {
+      throw new Error('Пользователь не авторизован')
+    }
+
+    return this.http.post(`${this.baseApiUrl}follow/${targetId}`, {
+      userId: currentUserId
+    })
   }
 
   unfollowUser(userId: string)
