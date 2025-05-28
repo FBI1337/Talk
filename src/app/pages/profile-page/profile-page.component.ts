@@ -28,52 +28,39 @@ export class ProfilePageComponent {
     profileService = inject(ProfileService)
     route = inject(ActivatedRoute)
 
-    private cdr = inject(ChangeDetectorRef);
-
     me$ = toObservable(this.profileService.me)
     subscribers$ = this.profileService.getSubscribersShortList(5)
 
-    currentProfileId: string | null = null;
     isSubscribed = false;
+    currentProfile: string | null = null;
+    cdr = inject(ChangeDetectorRef);
 
     profile$ = this.route.params
     .pipe (
-        switchMap(({ id }) => {
-            this.currentProfileId = id;
-
-            const profile$ = id === 'me' 
-            ?  this.me$
-            : this.profileService.getAccount(id);
-
-
-            if (id !== 'me') {
-                this.profileService.followUser(id).subscribe(res => {
-                    this.isSubscribed = true;
-                    this.cdr.detectChanges();
-                })
-            }
-
-            return profile$
-        })
+        switchMap(({ id }) => id === 'me'
+        ? this.me$
+        : this.profileService.getAccount(id)
+        )
     )
 
     isOwnProfile$ = combineLatest([this.profile$, this.me$]).pipe(
         map(([profile, me]) => profile?.id === me?.id)
     );
 
+    onSubscribe(userId: string) {
+        if (this.isSubscribed || !userId) return;
 
-    toggleFollow() {
-        if (!this.currentProfileId || this.currentProfileId === 'me') return;
+        this.profileService.followUser(userId).subscribe({
+            next: () => {
+                console.log(`Подписка на пользователя ${userId} успешна`);
 
-        const action$ = this.isSubscribed
-        ? this.profileService.unfollowUser(this.currentProfileId)
-        : this.profileService.followUser(this.currentProfileId);
-
-        action$.subscribe(() => {
-            this.isSubscribed = !this.isSubscribed;
-            this.cdr.detectChanges();
+                this.isSubscribed = true;
+                this.cdr.detectChanges();
+            },
+            error: (err) => {
+                console.error('Ошибка подписки', err);
+            }
         })
     }
-
 
 }

@@ -6,20 +6,16 @@
         >
         </app-profile-header>
 
-        <a
-        *ngIf="(isOwnProfile$ | async); else followButton"
-        class="btn to-settings-btn"
-        [routerLink]="['/settings']"
-        >
-            Редактировать
-            <svg icon="settings" class="to-settings-icon"></svg>
-        </a>
-
-        <ng-template #followButton>
-            <button class="btn to-settings-btn" (click)="toggleFollow()">
+        @if (isOwnProfile$ | async) {
+            <a class="btn to-settings-btn" [routerLink]="['/settings']">
+                Редактировать
+                <svg icon="settings" class="to-settings-icon"></svg>
+            </a>
+        } @else {
+            <button class="btn to-settings-btn">
                 {{ isSubscribed ? 'Вы подписаны' : 'Подписаться' }}
             </button>
-        </ng-template>
+        }
     </header>
 
     <main class="profile-page__body">
