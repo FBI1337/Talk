@@ -47,7 +47,7 @@ export class ProfilePageComponent {
         map(([profile, me]) => profile?.id === me?.id)
     );
 
-    onSubscribe(userId: string) {
+    onSubscribe(userId: string | undefined) {
         if (this.isSubscribed || !userId) return;
 
         this.profileService.followUser(userId).subscribe({

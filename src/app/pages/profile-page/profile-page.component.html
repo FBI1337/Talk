@@ -12,7 +12,7 @@
                 <svg icon="settings" class="to-settings-icon"></svg>
             </a>
         } @else {
-            <button class="btn to-settings-btn">
+            <button class="btn to-settings-btn" (click)="onSubscribe(profile?.id?.toString())">
                 {{ isSubscribed ? 'Вы подписаны' : 'Подписаться' }}
             </button>
         }
