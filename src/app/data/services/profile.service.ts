@@ -44,13 +44,13 @@ export class ProfileService {
     )
   }
 
-  followUser(userId: string) {
-    return this.http.post(`${this.baseApiUrl}follow/${userId}`, {});
+  followUser(id: string) {
+    return this.http.post(`${this.baseApiUrl}follow/${id}`, {});
   }
 
   unfollowUser(userId: string)
   {
-    return this.http.delete(`${this.baseApiUrl}unfollow/${userId}`,);
+    return this.http.delete(`${this.baseApiUrl}unfollow/${userId}`);
   }
 
   // checkIfSubscribed(userId: string) {
