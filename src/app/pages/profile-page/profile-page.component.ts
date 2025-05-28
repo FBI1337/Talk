@@ -31,17 +31,39 @@ export class ProfilePageComponent {
     me$ = toObservable(this.profileService.me)
     subscribers$ = this.profileService.getSubscribersShortList(5)
 
+    currentProfileId: string | null = null;
+    isSubscribed = false;
+
     profile$ = this.route.params
     .pipe (
-        switchMap(({id}) => id === 'me'
-        ? this.me$
-        : this.profileService.getAccount(id)
-        )
+        switchMap(({ id }) => {
+            this.currentProfileId = id;
+            const profile$ = id === 'me'
+            ?  this.me$
+            : this.profileService.getAccount(id);
+
+            return profile$
+        })
     )
 
     isOwnProfile$ = combineLatest([this.profile$, this.me$]).pipe(
         map(([profile, me]) => profile?.id === me?.id)
     );
+
+
+    toggleFollow() {
+        if (!this.currentProfileId || this.currentProfileId === 'me') return;
+
+        if (this.isSubscribed) {
+            this.profileService.unfollowUser(this.currentProfileId).subscribe(() => {
+                this.isSubscribed = false;
+            })
+        } else {
+            this.profileService.followUser(this.currentProfileId).subscribe(() => {
+                this.isSubscribed = true;
+            })
+        }
+    }
 
 
 }

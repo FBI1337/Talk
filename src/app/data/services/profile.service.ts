@@ -44,6 +44,15 @@ export class ProfileService {
     )
   }
 
+  followUser(userId: string) {
+    return this.http.post(`${this.baseApiUrl}follow/${userId}`, {});
+  }
+
+  unfollowUser(userId: string)
+  {
+    return this.http.delete(`${this.baseApiUrl}unfollow/${userId}`,);
+  }
+
   // patchProfile(profile: Partial<Profile>) {
   //   return this.http.patch<Profile>(
   //     `${this.baseApiUrl}account/me`,
