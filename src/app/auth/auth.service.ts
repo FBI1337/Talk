@@ -87,5 +87,6 @@ export class AuthService {
 
     this.cookieService.set('token', this.token)
     this.cookieService.set('refreshToken', this.refreshToken)
+    localStorage.setItem('userId', res.userId)
   }
 }
