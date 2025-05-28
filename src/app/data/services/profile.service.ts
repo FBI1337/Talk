@@ -44,8 +44,8 @@ export class ProfileService {
     )
   }
 
-  followUser(userId: string) {
-    return this.http.post(`${this.baseApiUrl}follow/${userId}`, {});
+  followUser(id: string) {
+    return this.http.post(`${this.baseApiUrl}follow/${id}`, {});
   }
 
   unfollowUser(userId: string)
