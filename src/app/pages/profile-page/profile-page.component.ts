@@ -47,8 +47,8 @@ export class ProfilePageComponent {
 
 
             if (id !== 'me') {
-                this.profileService.checkIfSubscribed(id).subscribe(res => {
-                    this.isSubscribed = res.subscribed;
+                this.profileService.followUser(id).subscribe(res => {
+                    this.isSubscribed = true;
                     this.cdr.detectChanges();
                 })
             }

@@ -53,9 +53,9 @@ export class ProfileService {
     return this.http.delete(`${this.baseApiUrl}unfollow/${userId}`,);
   }
 
-  checkIfSubscribed(userId: string) {
-    return this.http.get<{subscribed: boolean}>(`${this.baseApiUrl}follow/${userId}`);
-  }
+  // checkIfSubscribed(userId: string) {
+  //   return this.http.get<{subscribed: boolean}>(`${this.baseApiUrl}follow/${userId}`);
+  // }
 
   // patchProfile(profile: Partial<Profile>) {
   //   return this.http.patch<Profile>(
