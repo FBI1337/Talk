@@ -1,13 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { ProfileHeaderComponent } from "../../common-ui/profile-header/profile-header.component";
 import { ProfileService } from 'src/app/data/services/profile.service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { combineLatest, switchMap } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop'; 
 import { AsyncPipe, JsonPipe, NgForOf } from '@angular/common';
 import { SvgIconComponent } from "../../common-ui/svg-icon/svg-icon.component";
 import { ImgUrlPipe } from 'src/app/helpers/pipes/img-url.pipe';
 import { PostFeedComponent } from './post-feed/post-feed.component';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-profile-page',
@@ -32,12 +33,15 @@ export class ProfilePageComponent {
 
     profile$ = this.route.params
     .pipe (
-        switchMap(({id}) => {
-            if (id === 'me') return this.me$
-
-            return this.profileService.getAccount(id)
-        })
+        switchMap(({id}) => id === 'me'
+        ? this.me$
+        : this.profileService.getAccount(id)
+        )
     )
+
+    isOwnProfile$ = combineLatest([this.profile$, this.me$]).pipe(
+        map(([profile, me]) => profile?.id === me?.id)
+    );
 
 
 }
