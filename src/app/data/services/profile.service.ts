@@ -61,9 +61,18 @@ export class ProfileService {
     return this.http.delete(`${this.baseApiUrl}unfollow/${userId}`);
   }
 
-  // checkIfSubscribed(userId: string) {
-  //   return this.http.get<{subscribed: boolean}>(`${this.baseApiUrl}follow/${userId}`);
-  // }
+  checkIfSubscribed(targetUserId: string, userId: string | undefined) {
+    if (!userId) {
+      throw new Error('userId is undefined');
+    }
+
+    return this.http.get<{ subscribed: boolean }>(
+      `${this.baseApiUrl}follow/is-following/${targetUserId}`,
+      {
+        params: {userId: String(userId)}
+      }
+    )
+  }
 
   // patchProfile(profile: Partial<Profile>) {
   //   return this.http.patch<Profile>(

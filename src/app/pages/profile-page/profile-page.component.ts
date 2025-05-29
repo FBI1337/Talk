@@ -1,4 +1,4 @@
-import { Component, inject, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, ChangeDetectorRef, OnInit } from '@angular/core';
 import { ProfileHeaderComponent } from "../../common-ui/profile-header/profile-header.component";
 import { ProfileService } from 'src/app/data/services/profile.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -24,7 +24,7 @@ import { map } from 'rxjs/operators';
     templateUrl: './profile-page.component.html',
     styleUrls: ['./profile-page.component.scss'],
 })
-export class ProfilePageComponent {
+export class ProfilePageComponent implements OnInit {
     profileService = inject(ProfileService)
     route = inject(ActivatedRoute)
 
@@ -61,6 +61,33 @@ export class ProfilePageComponent {
                 console.error('Ошибка подписки', err);
             }
         })
+    }
+
+    ngOnInit(): void {
+        combineLatest([this.route.params, this.me$])
+        .pipe(
+        switchMap(([params, me]) => {
+            const targetId = params['id'] === 'me' ? me?.id : params['id'];
+            this.currentProfile = targetId;
+
+            if (!targetId || !me?.id || targetId === me.id) {
+                this.isSubscribed = false;
+                this.cdr.detectChanges();
+                return [];
+            }
+
+            return this.profileService.checkIfSubscribed(targetId, me.id.toString());
+        })
+        )
+        .subscribe ({
+            next: (res) => {
+                this.isSubscribed = res?.subscribed ?? false;
+                this.cdr.detectChanges();
+            },
+            error: (err) => {
+                console.error('Ошибка при проверке подписки', err);
+            }
+        });
     }
 
 }
