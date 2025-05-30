@@ -38,7 +38,14 @@ export class ProfileService {
 
   //запрос на сервер для получения списка подписчиков
   getSubscribersShortList(subsAmount = 3) {
-    return this.http.get<Pageble<Profile>>(`${this.baseApiUrl}account/subscribers`)
+
+    const userId = localStorage.getItem('userId') || '';
+
+    return this.http.get<Pageble<Profile>>(`${this.baseApiUrl}account/subscribers`, {
+      params: {
+        userId: userId
+      }
+    })
     .pipe(
       map( res => res.items.slice(0, subsAmount))
     )
