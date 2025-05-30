@@ -24,7 +24,7 @@ export class ProfileService {
 
   //запрос на сервер для получения списка всех аккаунтов
   getAccount(id: string) {
-    return this.http.get<Profile>(`${this.baseApiUrl}account/d${id}`)
+    return this.http.get<Profile>(`${this.baseApiUrl}account/${id}`)
   }
 
   //запрос на сервер для получения своего аккаунта
