@@ -38,9 +38,46 @@ export class ProfileService {
 
   //запрос на сервер для получения списка подписчиков
   getSubscribersShortList(subsAmount = 3) {
-    return this.http.get<Pageble<Profile>>(`${this.baseApiUrl}account/subscribers/`)
+
+    const userId = localStorage.getItem('userId') || '';
+
+    return this.http.get<Pageble<Profile>>(`${this.baseApiUrl}account/subscribers`, {
+      params: {
+        userId: userId
+      }
+    })
     .pipe(
       map( res => res.items.slice(0, subsAmount))
+    )
+  }
+
+  followUser(targetId: string) {
+    const currentUserId = localStorage.getItem('userId');
+
+    if (!currentUserId) {
+      throw new Error('Пользователь не авторизован')
+    }
+
+    return this.http.post(`${this.baseApiUrl}follow/${targetId}`, {
+      userId: currentUserId
+    })
+  }
+
+  unfollowUser(userId: string)
+  {
+    return this.http.delete(`${this.baseApiUrl}unfollow/${userId}`);
+  }
+
+  checkIfSubscribed(targetUserId: string, userId: string | undefined) {
+    if (!userId) {
+      throw new Error('userId is undefined');
+    }
+
+    return this.http.get<{ subscribed: boolean }>(
+      `${this.baseApiUrl}follow/is-following/${targetUserId}`,
+      {
+        params: {userId: String(userId)}
+      }
     )
   }
 
