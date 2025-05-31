@@ -10,7 +10,9 @@ export class ImgUrlPipe implements PipeTransform {
     if (!value) {
       return null;
     }
-    return `https://talk-backend-betatest.onrender.com/avatar${value}`;
+    return  value
+    ? `https://talk-backend-betatest.onrender.com/uploads/avatars/${value}`
+    : '../../../assets/imgs/avatar-placeholder.png';
   }
 
 }
