@@ -63,9 +63,20 @@ export class ProfileService {
     })
   }
 
-  unfollowUser(userId: string)
+  unfollowUser(targetId: string)
   {
-    return this.http.delete(`${this.baseApiUrl}unfollow/${userId}`);
+    const currentUserId = localStorage.getItem('userId');
+
+    if (!currentUserId)
+    {
+      throw new Error('Пользователь не авторизованн')
+    }
+
+    return this.http.post(`${this.baseApiUrl}unfollow/${targetId}`, 
+      {
+        userId: currentUserId
+      }
+    );
   }
 
   checkIfSubscribed(targetUserId: string, userId: string | undefined) {
