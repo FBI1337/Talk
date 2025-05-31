@@ -10,7 +10,7 @@ export class ImgUrlPipe implements PipeTransform {
     if (!value) {
       return null;
     }
-    return `https://icherniakov.ru/yt-course/${value}`;
+    return `https://talk-backend-betatest.onrender.com/avatar${value}`;
   }
 
 }
