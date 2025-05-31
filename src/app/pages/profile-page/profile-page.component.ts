@@ -48,19 +48,30 @@ export class ProfilePageComponent implements OnInit {
     );
 
     onSubscribe(userId: string | undefined) {
-        if (this.isSubscribed || !userId) return;
+        if (!userId) return;
 
-        this.profileService.followUser(userId).subscribe({
-            next: () => {
-                console.log(`Подписка на пользователя ${userId} успешна`);
+        if (this.isSubscribed) {
+            this.profileService.unfollowUser(userId).subscribe({
+                next: () => {
+                    this.isSubscribed = false;
+                    this.cdr.detectChanges();
+                },
+                error: (err) => {
+                    console.error('Ошибка отписки', err);
+                }
+            });
+        } else {
+            this.profileService.followUser(userId).subscribe({
+                next: () => {
+                    this.isSubscribed = true;
+                    this.cdr.detectChanges();
+                },
+                error: (err) => {
+                    console.error('Ошибка подписки', err);
+                }
+            })
+        }
 
-                this.isSubscribed = true;
-                this.cdr.detectChanges();
-            },
-            error: (err) => {
-                console.error('Ошибка подписки', err);
-            }
-        })
     }
 
     ngOnInit(): void {
