@@ -40,8 +40,12 @@ class="login-form"
             </button>
         </div>
     </label>
-    
-    <button class="btn btn-shadow" type="submit" [disabled]="isSubmitted()">Войти</button>
+    <div class="buttoncolums">
+        <button class="btn btn-shadow">
+            <a [routerLink]="['/register']"></a>
+        </button>
+        <button class="btn btn-shadow" type="submit" [disabled]="isSubmitted()">Войти</button>
+    </div>
 </form>
 
 
