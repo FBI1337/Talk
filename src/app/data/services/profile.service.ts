@@ -92,10 +92,10 @@ export class ProfileService {
     )
   }
 
-  // patchProfile(profile: Partial<Profile>) {
-  //   return this.http.patch<Profile>(
-  //     `${this.baseApiUrl}account/me`,
-  //     profile
-  //   )
-  // }
+  patchProfile(profile: Partial<Profile>) {
+    return this.http.patch<Profile>(
+      `${this.baseApiUrl}account/me`,
+      profile
+    )
+  }
 }

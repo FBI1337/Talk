@@ -37,6 +37,11 @@ export class SettingsPageComponent {
   }
 
   onSave() {
+    this.form.markAllAsTouched()
+    this.form.updateValueAndValidity()
 
+    if (this.form.invalid) return;
+    //@ts-ignore
+    firstValueFrom(this.profileService.patchProfile(this.form.value))
   }
 }
