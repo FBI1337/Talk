@@ -41,8 +41,10 @@ class="login-form"
         </div>
     </label>
     <div class="buttoncolums">
-        <button class="btn btn-shadow">
-            <a [routerLink]="['/register']"></a>
+        <button class="btn btn-shadow mr16">
+            <a [routerLink]="['/register']">
+                Зарегистрироваться
+            </a>
         </button>
         <button class="btn btn-shadow" type="submit" [disabled]="isSubmitted()">Войти</button>
     </div>
