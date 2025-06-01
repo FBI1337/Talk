@@ -85,10 +85,10 @@ class="register-form"
     </label>
 
     <div class="buttoncolums">
-        <button class="btn btn-shadow">
-            <a class="links" [routerLink]="['/login']">
-                Назад
-            </a>
+        <button class="btn btn-shadow" [routerLink]="['/login']">
+            <!-- <a class="links" [routerLink]="['/login']">
+            </a> -->
+            Назад
         </button>
         <button class="btn btn-shadow" type="submit" [disabled]="isSubmitted()">Зарегистрироваться</button>
     </div>
