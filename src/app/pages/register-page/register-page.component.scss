@@ -34,3 +34,13 @@
 .password-eye-btn.active {
     color: var(--primary-color);
 }
+
+.buttoncolums {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.liks {
+    text-decoration: none;
+    color: var(--dark-color);
+}

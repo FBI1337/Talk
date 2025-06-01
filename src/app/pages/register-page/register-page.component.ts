@@ -2,14 +2,14 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 
 
 @Component({
   selector: 'app-register-page',
   standalone: true,
-  imports: [ ReactiveFormsModule, CommonModule ],
+  imports: [ ReactiveFormsModule, CommonModule, RouterLink ],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.scss'
 })

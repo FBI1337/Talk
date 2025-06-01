@@ -42,8 +42,9 @@ class="login-form"
     </label>
     <div class="buttoncolums">
         <button class="btn btn-shadow">
-            <a class="liks" [routerLink]="['/register']"></a>
-            Зарегистрироваться
+            <a class="liks" [routerLink]="['/register']">
+                Зарегистрироваться
+            </a>
         </button>
         <button class="btn btn-shadow" type="submit" [disabled]="isSubmitted()">Войти</button>
     </div>
