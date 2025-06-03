@@ -28,7 +28,7 @@ export class SidebarComponent {
 
     me = this.profileService.me
 
-    adminRoutes: { label: string, icom: string, link: string }[] = [];
+    adminRoutes: { label: string, icon: string, link: string }[] = [];
 
     menuItems = [
         {
@@ -53,13 +53,29 @@ export class SidebarComponent {
         this.profileService.getMe().subscribe(profile => {
             if (profile.role === 'admin1') {
                 this.adminRoutes = [
-                    { label: 'Пользователи', icon: 'users', link: '/admin/users' }
+                    {
+                        label: 'Пользователи',
+                        icon: 'users',
+                        link: '/admin/users'
+                    }
                 ];
             } else if (profile.role === 'admin2') {
                 this.adminRoutes = [
-                    { label: 'Пользователи', icon: 'users', link: '/admin/users' },
-                    { label: 'Логи', icon: 'logs', link: '/admin/logs' },
-                    { label: 'База данных', icon: 'database', link: '/admin/database'}
+                    { 
+                        label: 'Пользователи',
+                        icon: 'users',
+                        link: '/admin/users'
+                    },
+                    {
+                        label: 'Логи',
+                        icon: 'logs',
+                        link: '/admin/logs'
+                    },
+                    {
+                        label: 'База данных',
+                        icon: 'database',
+                        link: '/admin/database'
+                    }
                 ];
             }
         });

@@ -4,7 +4,7 @@ export interface Profile {
     firstName: string,
     lastName: string,
     email: string,
-    role: string,
+    role: 'user' | 'admin1' | 'admin2',
     isBanned: string,
     avatarUrl: string | null,
     description: string,
