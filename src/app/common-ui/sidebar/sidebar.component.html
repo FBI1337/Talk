@@ -18,6 +18,21 @@
     </ul>
 </nav>
 
+@if (adminRoutes.length > 0) {
+    <div class="adminbtn">
+        <p class="medium-text mb10">Администрирование</p>
+        <ul class="main-menu-list mb20">
+            @for (route of adminRoutes; track route.link) {
+                <li>
+                    <a class="menu-item" [routerLink]="[route.link]">
+                        <svg [icon]="route.icon"></svg>
+                        <span>{{ route.label }}</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+}
 
 <p class="medium-text mb20">Подписчики</p>
 
@@ -37,21 +52,6 @@
     <svg icon="arrow" class="to-subscribers-icon"></svg>
 </div>
 
-@if (adminRoutes.length > 0) {
-    <div class="adminbtn">
-        <p class="medium-text mb10">Администрирование</p>
-        <ul class="main-menu-list mb20">
-            @for (route of adminRoutes; track route.link) {
-                <li>
-                    <a class="menu-item" [routerLink]="[route.link]">
-                        <svg [icon]="route.icon"></svg>
-                        <span>{{ route.label }}</span>
-                    </a>
-                </li>
-            }
-        </ul>
-    </div>
-}
 
 <footer class="sidebar__footer">
     @if (me(); as me) {
