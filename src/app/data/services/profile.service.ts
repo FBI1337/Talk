@@ -36,6 +36,12 @@ export class ProfileService {
   }
 
 
+  getUserRole() {
+    const user = this.me();
+    return user ? user.role : null;
+  }
+
+
   //запрос на сервер для получения списка подписчиков
   getSubscribersShortList(subsAmount = 3) {
 
