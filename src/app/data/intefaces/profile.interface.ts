@@ -1,13 +1,16 @@
 export interface Profile {
     id: number,
     username: string,
-    avatarUrl: string | null,
-    subscribersAmount: number,
     firstName: string,
     lastName: string,
-    isActive: boolean,
+    email: string,
+    role: string,
+    isBanned: string,
+    avatarUrl: string | null,
+    description: string,
     stack: string[],
     city: string,
-    description: string,
+    isActive: boolean,
+    subscribersAmount: number,
 }
         

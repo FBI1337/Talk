@@ -28,6 +28,8 @@ export class SidebarComponent {
 
     me = this.profileService.me
 
+    adminRoutes: { label: string, icom: string, link: string }[] = [];
+
     menuItems = [
         {
             label: 'Моя страница',
@@ -48,6 +50,18 @@ export class SidebarComponent {
     ]
 
     ngOnInit() {
-        firstValueFrom(this.profileService.getMe())        
+        this.profileService.getMe().subscribe(profile => {
+            if (profile.role === 'admin1') {
+                this.adminRoutes = [
+                    { label: 'Пользователи', icon: 'users', link: '/admin/users' }
+                ];
+            } else if (profile.role === 'admin2') {
+                this.adminRoutes = [
+                    { label: 'Пользователи', icon: 'users', link: '/admin/users' },
+                    { label: 'Логи', icon: 'logs', link: '/admin/logs' },
+                    { label: 'База данных', icon: 'database', link: '/admin/database'}
+                ];
+            }
+        });
     }
 }
