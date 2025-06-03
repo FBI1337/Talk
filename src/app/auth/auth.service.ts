@@ -75,6 +75,7 @@ export class AuthService {
 
   logout() {
     this.cookieService.deleteAll()
+    localStorage.clear() 
     this.token = null;
     this.refreshToken = null;
     this.router.navigate(['/login'])
