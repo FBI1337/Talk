@@ -23,10 +23,10 @@ export class SearchPageComponent {
     return profile.id;
   }
 
-  constructor() {
-    this.profileService.getTestAccounts()
-    .subscribe(val => {
-      this.profiles = val
-    })
-  }
+  // constructor() {
+  //   this.profileService.getTestAccounts()
+  //   .subscribe(val => {
+  //     this.profiles = val
+  //   })
+  // }
 }

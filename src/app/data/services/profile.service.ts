@@ -10,7 +10,7 @@ import { map, tap } from 'rxjs';
 export class ProfileService {
 
   http: HttpClient = inject(HttpClient);
-  notmybackend = 'https://icherniakov.ru/yt-course/auth/'
+  // notmybackend = 'https://icherniakov.ru/yt-course/auth/'
   baseApiUrl = 'https://talk-backend-betatest.onrender.com/'
   me = signal<Profile | null>(null)
 
@@ -19,7 +19,7 @@ export class ProfileService {
 
   //запрос на сервер для получения списка всех тестовых аккаунтов
   getTestAccounts() {
-    return this.http.get<Profile[]>( `${this.notmybackend}account/test_accounts`)
+    // return this.http.get<Profile[]>( `${this.notmybackend}account/test_accounts`)
   }
 
   //запрос на сервер для получения списка всех аккаунтов
