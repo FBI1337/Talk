@@ -1,4 +1,4 @@
-import { inject, Injectable, signal, Signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Profile } from '../intefaces/profile.interface';
 import { Pageble } from '../intefaces/pageble.interface';

@@ -1,16 +1,56 @@
-<div class="tablewrapper">
-    <div class="columns">
-        <p>Хер</p>
-        <p>Хер</p>
-        <p>Хер</p>
-        <p>Хер</p>
-        <p>Хер</p>
-        <p>Хер</p>
-        <p>Хер</p>
-        <p>Хер</p>
-        <p>Хер</p>
-        <p>Хер</p>
-        <p>Хер</p>
-        <p>Хер</p>
+<div class="table-wrapper">
+  <div class="users-table mb20">
+    <div class="header">
+      <div>Аватар</div>
+      <div>Username</div>
+      <div>Имя</div>
+      <div>Фамилия</div>
+      <div>Email</div>
+      <div>Роль</div>
+      <div>Город</div>
+      <div>Подписчики</div>
     </div>
+  </div>
+
+  <div class="row" *ngFor="let user of users">
+    <!-- Сетка с данными -->
+    <div class="grid-row">
+      <div>
+        <img [src]="user.avatarUrl || 'assets/imgs/avatar-placeholder.png'" class="avatar" />
+      </div>
+      <div>{{ user.username }}</div>
+      <div>{{ user.firstName || '—' }}</div>
+      <div>{{ user.lastName || '—' }}</div>
+      <div>{{ user.email }}</div>
+      <div>{{ user.role }}</div>
+      <div>{{ user.city || '—' }}</div>
+      <div>{{ user.subscribersAmount }}</div>
+      <div>
+        <span *ngIf="user.isBanned" class="status banned">Забанен</span>
+        <span *ngIf="isFrozen(user)" class="status frozen">
+            Заморожен до {{ user.frozenUntil | date: 'short' }}
+        </span>
+        <span *ngIf="!user.isBanned && (isFrozen(user))" class="status ok">
+            Активен
+        </span>
+      </div>
+    </div>
+
+
+    <!-- Кнопки -->
+    <div class="btncolumns">
+      <button (click)="goToProfile(user)">Профиль</button>
+      
+      <button
+        (click)="isFrozen(user) ? unfreezeUser(user) : openFreezeDialog(user)"
+        [disabled]="currentUserRole === 'admin1'">
+        {{ isFrozen(user) ? 'Разморозить' : 'Заморозить' }}
+      </button>
+      <button
+      (click)="toggleBan(user)"
+      [disabled]="currentUserRole === 'admin1'">
+      {{ user.isBanned ? 'Разбанить' : 'Забанить'}}
+      </button>
+    </div>
+  </div>
 </div>
