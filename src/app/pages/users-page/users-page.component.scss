@@ -1,0 +1,8 @@
+.tablewrapper{ 
+    display: flex;
+}
+
+.columns {
+    display: grid;
+    grid-template-columns: 12fr 1fr;
+}
