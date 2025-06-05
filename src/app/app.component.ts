@@ -14,10 +14,12 @@ export class AppComponent implements OnInit {
   private profileService = inject(ProfileService);
 
   ngOnInit(): void {
+
+    const userId = localStorage.getItem('userId')
     this.profileService.setActive(true).subscribe();
 
     window.addEventListener('beforeunload', () => {
-      this.profileService.sendInactiveOnUnload();
+      if (userId) this.profileService.sendInactiveOnUnload(userId);
     });
 
     setInterval(() => this.profileService.setActive(true).subscribe(), 30000)

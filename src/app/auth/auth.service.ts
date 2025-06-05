@@ -4,6 +4,7 @@ import { catchError, tap, throwError } from 'rxjs';
 import { TokenResponse } from './auth.interface';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { ProfileService } from '../data/services/profile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   http = inject(HttpClient)
   router = inject(Router)
+  profileService = inject(ProfileService)
   cookieService = inject(CookieService)
   notmybackend = 'https://icherniakov.ru/yt-course/auth/'
   baseApiUrl = 'https://talk-backend-betatest.onrender.com/'
@@ -79,6 +81,7 @@ export class AuthService {
     this.token = null;
     this.refreshToken = null;
     this.router.navigate(['/login'])
+    this.profileService.setActive(false).subscribe()
   }
 
 

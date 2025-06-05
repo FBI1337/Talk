@@ -109,9 +109,9 @@ export class ProfileService {
     return this.http.post(`${this.baseApiUrl}account/active`, { isActive })
   }
 
-  sendInactiveOnUnload() {
+  sendInactiveOnUnload(userId: string) {
     const blob = new Blob(
-      [JSON.stringify({ isActive: false})],
+      [JSON.stringify({ isActive: false, userId})],
       { type: 'aplication/json' },
     );
     navigator.sendBeacon(`${this.baseApiUrl}account/active`, blob)
