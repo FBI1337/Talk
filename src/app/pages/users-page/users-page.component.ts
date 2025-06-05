@@ -89,4 +89,8 @@ export class UsersPageComponent implements OnInit {
   goToProfile(user: AdminUser): void {
     this.router.navigate(['/profile/', user._id]);
   }
+
+  isOnline(user: AdminUser): boolean {
+    return user.isActive;
+  }
 }

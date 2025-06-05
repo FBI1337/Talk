@@ -1,7 +1,8 @@
 import { HttpHandlerFn, HttpInterceptorFn, HttpRequest } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { AuthService } from "./auth.service";
-import { catchError, switchMap, throwError } from "rxjs";
+import { catchError, switchMap, throwError, of } from "rxjs";
+import { Router } from "@angular/router";
 
 let isRefreshing = false
 
@@ -9,6 +10,7 @@ let isRefreshing = false
 export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
     const authService = inject(AuthService);
     const token = authService.token;
+    const router = inject(Router);
 
     if (!token) return next(req)
 
@@ -21,10 +23,12 @@ export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
     .pipe(
         catchError(error => {
             if (error.status === 403) {
-                return refreshAndProceed(authService, req, next)
+                authService.logout();
+                router.navigate(['/login']);
+                return of(error);
             }
 
-            return throwError(error)
+            return throwError(() => error)
         })
     )
 }

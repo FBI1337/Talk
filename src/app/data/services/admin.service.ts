@@ -16,19 +16,19 @@ export class AdminService {
     }
 
     freezeUser(id: string, frozenUntil: Date): Observable<any> {
-        return this.http.post(`${this.baseApiUrl}freeze/${id}`, { frozenUntil });
+        return this.http.post(`${this.baseApiUrl}admin/freeze/${id}`, { frozenUntil });
     }
 
     unfreezeUser(id: string): Observable<any> {
-        return this.http.post(`${this.baseApiUrl}unfreeze/${id}`, {});
+        return this.http.post(`${this.baseApiUrl}admin/unfreeze/${id}`, {});
     }
 
     banUser(id: string): Observable<any> {
-        return this.http.post(`${this.baseApiUrl}ban/${id}`, {});
+        return this.http.post(`${this.baseApiUrl}admin/ban/${id}`, {});
     }
 
     unbanUser(id: string): Observable<any> {
-        return this.http.post(`${this.baseApiUrl}unban/${id}`, {});
+        return this.http.post(`${this.baseApiUrl}admin/unban/${id}`, {});
     }
 }
 

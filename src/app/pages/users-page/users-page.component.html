@@ -1,6 +1,6 @@
 <div class="table-wrapper">
   <div class="users-table mb20">
-    <div class="header">
+    <div class="header h6">
       <div>Аватар</div>
       <div>Username</div>
       <div>Имя</div>
@@ -12,9 +12,16 @@
     </div>
   </div>
 
-  <div class="row" *ngFor="let user of users">
+  <div class="row"
+  [ngClass]="{
+    'banned': user.isBanned,
+    'frozen': !user.isBanned && isFrozen(user),
+    'online': !user.isBanned && !isFrozen(user) && isOnline(user)
+  }"
+  *ngFor="let user of users"
+  >
     <!-- Сетка с данными -->
-    <div class="grid-row">
+    <div class="grid-row h6">
       <div>
         <img [src]="user.avatarUrl || 'assets/imgs/avatar-placeholder.png'" class="avatar" />
       </div>
@@ -25,15 +32,12 @@
       <div>{{ user.role }}</div>
       <div>{{ user.city || '—' }}</div>
       <div>{{ user.subscribersAmount }}</div>
-      <div>
-        <span *ngIf="user.isBanned" class="status banned">Забанен</span>
-        <span *ngIf="isFrozen(user)" class="status frozen">
-            Заморожен до {{ user.frozenUntil | date: 'short' }}
-        </span>
-        <span *ngIf="!user.isBanned && (isFrozen(user))" class="status ok">
-            Активен
-        </span>
-      </div>
+    </div>
+    <div class="status-ribon frozen-ribbon h6" *ngIf="isFrozen(user)">
+      Заморожен до {{ user.frozenUntil | date: 'dd.MM.yyyy HH:mm' }}
+    </div>
+    <div class="status-ribon banned-ribbon h6" *ngIf="user.isBanned">
+      В Бане
     </div>
 
 
@@ -43,7 +47,7 @@
       
       <button
         (click)="isFrozen(user) ? unfreezeUser(user) : openFreezeDialog(user)"
-        [disabled]="currentUserRole === 'admin1'">
+        >
         {{ isFrozen(user) ? 'Разморозить' : 'Заморозить' }}
       </button>
       <button

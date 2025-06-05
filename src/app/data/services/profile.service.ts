@@ -104,4 +104,16 @@ export class ProfileService {
       profile
     )
   }
+
+  setActive (isActive: boolean) {
+    return this.http.post(`${this.baseApiUrl}account/active`, { isActive })
+  }
+
+  sendInactiveOnUnload() {
+    const blob = new Blob(
+      [JSON.stringify({ isActive: false})],
+      { type: 'aplication/json' },
+    );
+    navigator.sendBeacon(`${this.baseApiUrl}account/active`, blob)
+  }
 }

@@ -23,9 +23,74 @@
 }
 
 .row {
+  position: relative;
   background: var(--dark-color);
   border: 1px solid var(--light-color);
   margin-top: 20px;
+  overflow: hidden;
+
+  &.online {
+    border: 2px solid green;
+  }
+
+  &.frozen {
+    border: 2px solid blue;
+  }
+
+  &.banned { 
+    border: 2px solid red;
+  }
+
+  // .status-ribbon {
+  //   position: absolute;
+  //   bottom: 0px;
+  //   left: -60px;
+  //   width: 200px;
+  //   text-align: center;
+  //   transform: rotate(-45deg);
+  //   font-weight: bold;
+  //   color: white;
+  //   padding: 8px 0;
+  //   z-index: 2;
+  //   font-size: 14px;
+  //   pointer-events: none;
+  //   text-transform: uppercase;
+  //   opacity: 0.9;
+  //   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  // }
+
+  .frozen-ribbon {
+    background-color: #03a9f4;
+    position: absolute;
+    bottom: 63px;
+    left: -79px;
+    width: 169dvh;
+    text-align: center;
+    transform: rotate(361deg);
+    font-weight: bold;
+    padding: 5px 0;
+    z-index: 1;
+    pointer-events: none;
+    text-transform: uppercase;
+    opacity: 0.9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .banned-ribbon {
+    background-color: #f44336;
+    position: absolute;
+    bottom: 63px;
+    left: -79px;
+    width: 169dvh;
+    text-align: center;
+    transform: rotate(361deg);
+    padding: 5px 0;
+    z-index: 1;
+    pointer-events: none;
+    text-transform: uppercase;
+    opacity: 0.9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
 
   .grid-row {
     display: grid;
