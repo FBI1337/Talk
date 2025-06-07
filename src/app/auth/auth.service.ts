@@ -64,6 +64,10 @@ export class AuthService {
     )
   }
 
+  verifyResetToken(token: string) {
+    return this.http.get(`${this.baseApiUrl}auth/reset-password/${token}`);
+  }
+
   refreshAuthToken() {
     return this.http.post<TokenResponse>(
       `${this.baseApiUrl}auth/refresh`,

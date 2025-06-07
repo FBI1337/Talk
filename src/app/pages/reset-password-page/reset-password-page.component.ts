@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/auth/auth.service';
   templateUrl: './reset-password-page.component.html',
   styleUrl: './reset-password-page.component.scss'
 })
-export class ResetPasswordPageComponent {
+export class ResetPasswordPageComponent implements OnInit{
   authService = inject(AuthService);
   route = inject(ActivatedRoute);
   router = inject(Router);
@@ -30,6 +30,23 @@ export class ResetPasswordPageComponent {
     validators: passwordMatchValidator
   });
 
+  ngOnInit(): void {
+    if(!this.token) {
+      this.router.navigate(['/404']);
+      return;
+    }
+
+    this.authService.verifyResetToken(this.token).subscribe({
+      next: () => {
+
+      },
+
+      error: () => {
+        this.router.navigate(['/404'])
+      }
+    })
+  }
+
   message: string | null = null;
   error: string | null = null;
 
@@ -47,8 +64,11 @@ export class ResetPasswordPageComponent {
         setTimeout(() => this.router.navigate(['/login']), 2000);
       },
 
-      error: () => {
-        this.error = 'Ошибка при сбросе пароля. Попробуйте снова.';
+      error: (err) => {
+        if (err.status === 400) {
+          this.error = 'Срок действия ссылки истек. Пожалуйста запросите новую.';
+          setTimeout(() => 'Ошибка при сбросе пароля. Попробуйте снова');
+        }
       },
     });
   }

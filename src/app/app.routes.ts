@@ -11,7 +11,7 @@ import { LogsPageComponent } from './pages/logs-page/logs-page.component';
 import { DatabasePageComponent } from './pages/database-page/database-page.component';
 import { ForgotPasswordPageComponent } from './pages/forgot-password-page/forgot-password-page.component';
 import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
-
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 export const routes: Routes = [
     { 
         path: '', component: LayoutComponent, children: [
@@ -31,6 +31,8 @@ export const routes: Routes = [
     { path: 'register', component: RegisterPageComponent},
 
     { path: 'forgot-password', component: ForgotPasswordPageComponent},
-    { path: 'reset-password', component: ResetPasswordPageComponent }
+    { path: 'reset-password', component: ResetPasswordPageComponent }, 
+    { path: '404', component: NotFoundPageComponent },
+    { path: '**', redirectTo: '/404'}
 ];
 
