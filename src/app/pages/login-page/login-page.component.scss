@@ -34,14 +34,14 @@
     color: var(--primary-color);
 }
 
-.buttoncolums {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.line-label {
+    display: flex;
+    justify-content: space-between;
 }
 
 .links {
     text-decoration: none;
-    color: var(--dark-color);
+    color: var(--light-color);
 }
 .input-err.ng-invalid.ng-touched {
     border: 1px solid var(--error-color);
@@ -124,5 +124,46 @@
     100% {
         transform: scale(1);
         opacity: 0;
+    }
+}
+
+.custom-checkbox{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    gap: 8px;
+    position: relative;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    .checkmark {
+        height: 20px;
+        width: 20px;
+        background-color: var(--dark-color);
+        display: inline-block;
+        position: relative;
+    }
+
+    input:checked + .checkmark::after {
+        content: "";
+        position: absolute;
+        left: 6px;
+        top: 0px;
+        width: 9px;
+        height: 15px;
+        border: 1px solid var(--light-color);
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+    
+    input:checked + .checkmark {
+        background-color: var(--primary-color);
     }
 }

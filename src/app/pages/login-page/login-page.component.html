@@ -84,11 +84,24 @@ class="login-form"
             <span *ngIf="form.get('password')?.errors?.['required']">Поле обязательно</span>
         </div>
     </label>
-    <div class="buttoncolums">
-        <button class="btn btn-shadow" [routerLink]="['/register']">
-            Зарегистрироваться
-        </button>
+    
+    <div class="line-label text-buttons mb32">
+        <label class="custom-checkbox" for="remember">
+            <input type="checkbox" id="remember">
+            <span class="checkmark"></span>
+            Запомнить меня
+        </label>
+        <div>
+            Восстановить пароль
+        </div>
+    </div>
+    
+    <div class="mb60">
         <button class="btn btn-shadow" type="submit" [disabled]="form.invalid || isSubmitted()">Войти</button>
+    </div>
+    
+    <div class="regular">
+        <span>У вас нет учетной записи? <a class="regular-bold links" [routerLink]="['/register']">Создать учетную запись</a></span>
     </div>
 </form>
 
