@@ -88,4 +88,8 @@ class="login-form"
     </div>
 </form>
 
+<div *ngIf="backendError()" class="error regular">
+    {{ backendError() }}
+</div>
+
 <img src="assets/svg/logo-big.svg" alt="logo">
