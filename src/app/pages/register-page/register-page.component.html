@@ -6,40 +6,69 @@ class="register-form"
 >
     <h1 class="h1 mb60">Регистрация</h1>
 
-    <label class="tt-control-label mb16">
+    <label class="tt-control-label input-label mb20">
         Имя
         <input
         formControlName="firstName"
-        class="tt-input" type="text" placeholder="Введите имя">
+        class="tt-input input-err"
+        type="text"
+        placeholder="Введите имя"
+        >
+        <div *ngIf="form.get('firstName')?.invalid && form.get('firstName')?.touched" class="error tooltip regular">
+            <span *ngIf="form.get('firstName')?.errors?.['required']">Поле обязательно</span>
+            <span *ngIf="form.get('firstName')?.errors?.['minlength']">Минимум 2 символа</span>
+        </div>
     </label>
 
-    <label class="tt-control-label mb16">
+    <label class="tt-control-label input-label mb20">
         Фамилия
         <input
         formControlName="lastName"
-        class="tt-input" type="text" placeholder="Введите фамилию">
+        class="tt-input input-err"
+        type="text"
+        placeholder="Введите фамилию"
+        >
+        <div *ngIf="form.get('lastName')?.invalid && form.get('lastName')?.touched" class="error tooltip regular">
+            <div *ngIf="form.get('lastName')?.errors?.['required']">Поле обязательно</div>
+            <div *ngIf="form.get('lastName')?.errors?.['minlength']">Минимум 2 символа</div>
+        </div>
     </label>
 
-    <label class="tt-control-label mb16">
-        Telegram username
+    <label class="tt-control-label mb20">
+        Username
         <input
         formControlName="username"
-        class="tt-input" type="text" placeholder="Введите логин">
+        class="tt-input input-err"
+        type="text"
+        placeholder="Введите логин"
+        >
+        <div *ngIf="form.get('username')?.invalid && form.get('username')?.touched" class="error regular">
+            <div *ngIf="form.get('username')?.errors?.['required']">Поле обязательно</div>
+            <div *ngIf="form.get('username')?.errors?.['minlength']">Username должен иметь минимум 3 символа</div>
+            <div *ngIf="form.get('username')?.errors?.['pattern']">Допустимы только буквы, цифры и _</div>
+        </div>
     </label>
 
-    <label class="tt-control-label mb16">
+    <label class="tt-control-label input-label mb20">
         Email
         <input
         formControlName="email"
-        class="tt-input" type="email" placeholder="Введите email">
+        class="tt-input input-err"
+        type="email"
+        placeholder="Введите email"
+        >
+        <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="error tooltip regular">
+            <div *ngIf="form.get('email')?.errors?.['required']">Поле обязательно</div>
+            <div *ngIf="form.get('email')?.errors?.['email']">Неправильный формат почты</div>
+        </div>
     </label>
 
-    <label class="tt-control-label mb16">
+    <label class="tt-control-label input-label mb20">
         Пароль
         <div class="password-input">
             <input
             formControlName="password"
-            class="tt-input"
+            class="tt-input input-err"
             [type]="isPasswordVisible() ? 'text' : 'password'"
             placeholder="Введите пароль"
             >
@@ -57,16 +86,27 @@ class="register-form"
                 </svg>
             </button>
         </div>
+        <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched || form.get('password')?.dirty" class="error tooltip regular">
+            <span *ngIf="form.get('password')?.errors?.['required']">Поле обязательно</span>
+            <span *ngIf="form.get('password')?.errors?.['minlength']">Минимум 6 символов</span>
+        </div>
     </label>
 
-    <label class="tt-control-label mb32">
+    <label class="tt-control-label input-label mb38">
         Повторите пароль
         <div class="password-input">
             <input
             formControlName="confirmPassword"
-            class="tt-input"
+            class="tt-input input-err"
             [type]="isConfirmPasswordVisible() ? 'text' : 'password'"
             placeholder="Введите повторно пароль"
+            [ngClass]="{
+                'input-error' : (
+                    form.get('confirmPassword')?.touched || form.get('confirmPassword')?.dirty
+                ) && (
+                    form.get('confirmPassword')?.errors || form.errors?.['passwordMismatch']
+                )
+            }"
             >
     
             <button
@@ -81,16 +121,21 @@ class="register-form"
                     fill="currentColor" fill-opacity="0.75"/>
                 </svg>
             </button>
+        </div>  
+
+        <div *ngIf="form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.touched || form.get('confirmPassword')?.dirty" class="error tooltip regular">
+            <div *ngIf="form.get('confirmPassword')?.errors?.['required']">Поле обязательно</div>
+            <div *ngIf="form.errors?.['passwordMismatch']">Пароли не совпадают</div>
         </div>
+        
     </label>
 
     <div class="buttoncolums">
         <button class="btn btn-shadow" [routerLink]="['/login']">
             Назад
         </button>
-        <button class="btn btn-shadow" type="submit" [disabled]="isSubmitted()">Зарегистрироваться</button>
+        <button class="btn btn-shadow" type="submit" [disabled]="form.invalid || isSubmitted()">Зарегистрироваться</button>
     </div>
 </form>
-
 
 <img src="assets/svg/logo-big.svg" alt="logo">

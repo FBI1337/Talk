@@ -1,4 +1,37 @@
+
+
+<div *ngIf="accountBlockedError()" class="error-block-wrapper" (click)="closeError()">
+    <div class="error-block subtitle">
+        <div class="h6">
+            Блокировка
+        </div>
+        {{ accountBlockedError() }}
+        <div>
+            Причина:  "Нарушение Правил Пользования Сервисом"
+        </div>
+    </div>
+</div>
+
+
+<div
+*ngIf="accountFreezeError()"
+class="error-block-wrapper"
+[class.fade-out]="isFadingOut()"
+(click)="closeFreezeError()"
+>
+    <div class="error-block subtitle">
+        <div class="h6">
+            Заморозка
+        </div>
+        {{ accountFreezeError() }}
+        <div>
+            {{ firstNameAccount }}, мы обнаружили подозрительную активность и времено заморозили Ваш профиль, чтобы вырвать ее из рук злоумышлинников 
+        </div>
+    </div>
+</div>
+
 <!-- Верстка страницы Входа -->
+
 <form
 class="login-form"
 [formGroup]="form"
@@ -6,21 +39,25 @@ class="login-form"
 >
     <h1 class="h1 mb60">Вход</h1>
 
-    <label class="tt-control-label mb16">
-        Telegram username
+    <label class="tt-control-label input-label mb20">
+        Username
         <input
         formControlName="username"
-        class="tt-input" type="text" placeholder="Введите логин">
+        class="tt-input input-err" type="text" placeholder="Введите логин">
+
+        <div *ngIf="form.get('username')?.invalid && form.get('username')?.touched" class="error tooltip regular">
+            <div *ngIf="form.get('username')?.errors?.['required']">Поля обязательно</div>
+            <div *ngIf="form.get('username')?.errors?.['minlength']">Username должен иметь минимум 3 символа</div>
+        </div>
     </label>
 
-    <label class="tt-control-label mb32">
+    <label class="tt-control-label input-label mb32">
         Пароль
-
         <div class="password-input">
 
             <input
             formControlName="password"
-            class="tt-input"
+            class="tt-input input-err"
             [type]="isPasswordVisible() ? 'text' : 'password'"
             placeholder="Введите пароль"
             >
@@ -39,15 +76,16 @@ class="login-form"
                 </svg>
             </button>
         </div>
+        <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="error tooltip regular">
+            <span *ngIf="form.get('password')?.errors?.['required']">Поле обязательно</span>
+        </div>
     </label>
     <div class="buttoncolums">
         <button class="btn btn-shadow" [routerLink]="['/register']">
             Зарегистрироваться
         </button>
-        <button class="btn btn-shadow" type="submit" [disabled]="isSubmitted()">Войти</button>
+        <button class="btn btn-shadow" type="submit" [disabled]="form.invalid || isSubmitted()">Войти</button>
     </div>
 </form>
-
-
 
 <img src="assets/svg/logo-big.svg" alt="logo">

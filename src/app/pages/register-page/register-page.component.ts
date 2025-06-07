@@ -1,7 +1,7 @@
 // handler страницы регистрации
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 
@@ -26,16 +26,39 @@ export class RegisterPageComponent {
   isSubmitted = signal<boolean>(false);
 
   form = new FormGroup({
-    firstName: new FormControl<string | null>(null, Validators.required),
-    lastName: new FormControl<string | null>(null, Validators.required),
-    username: new FormControl<string | null>(null, Validators.required),
-    password: new FormControl<string | null>(null, Validators.required),
+    firstName: new FormControl<string | null>(null, [
+      Validators.required,
+      Validators.minLength(2)
+    ]),
+    lastName: new FormControl<string | null>(null, [
+      Validators.required,
+      Validators.minLength(2)
+    ]),
+    username: new FormControl<string | null>(null,[
+      Validators.required,
+      Validators.minLength(3),
+      Validators.pattern(/^[a-zA-Z0-9_]+$/)
+    ]),
+    password: new FormControl<string | null>(null, [
+      Validators.required,
+      Validators.minLength(6)
+    ]),
     confirmPassword: new FormControl<string | null>(null, Validators.required),
-    email: new FormControl<string | null>(null, [Validators.required, Validators.email]),
-  })
+    email: new FormControl<string | null>(null, [
+      Validators.required,
+      Validators.email
+    ]),
+  }, { 
+    validators: passwordMatchValidator
+  });
 
-  onSubmit() {    
-    if (this.form.valid) {
+  onSubmit() {
+    
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
       this.isSubmitted.set(true);
       //@ts-ignore
       this.authService.register(this.form.value)
@@ -52,5 +75,9 @@ export class RegisterPageComponent {
         }
       })
     }
-  }
+}
+function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+  const password = control.get('password')?.value;
+  const confirm = control.get('confirmPassword')?.value;
+  return password === confirm ? null : { passwordMismatch: true}
 }

@@ -1,19 +1,4 @@
-
-// Custom Theming for Angular Material
-// For more information: https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
-
-html {
-  @include mat.theme((
-    color: (
-      theme-type: light,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
-}/* You can add global styles to this file, and also import other style files */
 @import 'fonts.scss';
 @import 'margins.scss';
 
@@ -26,6 +11,8 @@ html {
     --gray-color: #5F646D;
     --darck-hover-color: #2c2c2c;
     --light-transparent-color: rgba(255, 255, 255, 0.75);
+    --error-color: #f44336;
+    --light-error-color: #ffebeb;
 }
 
 
@@ -183,6 +170,7 @@ img {
 }
 
 .tt-control-label {
+    position: relative;
     font-weight: 700;
     font-size: 12px;
     line-height: 16px;
@@ -238,5 +226,3 @@ img {
     height: 84px;
     resize: none;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

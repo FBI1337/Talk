@@ -43,3 +43,86 @@
     text-decoration: none;
     color: var(--dark-color);
 }
+.input-err.ng-invalid.ng-touched {
+    border: 1px solid var(--error-color);
+}
+
+.input-error {
+    border: 1px solid var(--error-color);
+}
+
+.error {
+    color: var(--error-color);
+}
+
+.tooltip {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    color: var(--error-color);
+    white-space: nowrap;
+    z-index: 100;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+}
+
+.input-label:hover .tooltip {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.error-block-wrapper{ 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease-in-out;
+    transform: opacity 0.3s ease-in-out;
+    opacity: 1;
+}
+
+.error-block-wrapper.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.error-block {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    padding: 20px 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+    animation: popIn 0.3s ease-out;
+    cursor: pointer;
+}
+
+
+@keyframes fadeIn {
+
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}

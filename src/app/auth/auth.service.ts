@@ -38,7 +38,7 @@ export class AuthService {
       `${this.baseApiUrl}auth/token`,
       fd,
     ).pipe(
-      tap(val => this.saveTokens(val))
+      tap(val => this.saveTokens(val)),
     )
   }
 
