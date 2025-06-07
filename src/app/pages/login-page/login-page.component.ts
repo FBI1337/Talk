@@ -31,7 +31,6 @@ export class LoginPageComponent implements OnInit {
   isFadingOut = signal(false);
 
   closeError(){
-
     this.isFadingOut.set(true);
 
     setTimeout(() => {
@@ -40,8 +39,11 @@ export class LoginPageComponent implements OnInit {
     }, 300)
   }
 
+  goToForgotPassword() {
+    this.router.navigate(['/forgot-password'])
+  }
+
   closeFreezeError(){
-    
     this.isFadingOut.set(true);
 
     setTimeout(() => {
@@ -63,7 +65,8 @@ export class LoginPageComponent implements OnInit {
     ]),
     password: new FormControl<string | null>(null, [
       Validators.required,
-    ])
+    ]),
+    rememberMe: new FormControl<boolean>(false)
   });
 
   onSubmit() {
@@ -75,7 +78,11 @@ export class LoginPageComponent implements OnInit {
 
     this.isSubmitted.set(true); 
     //@ts-ignore
-    this.authService.login(this.form.value)
+    
+    const username = this.form.get('username')?.value ?? '';
+    const password = this.form.get('password')?.value ?? '';
+    const rememberMe = this.form.get('rememberMe')?.value ?? false;
+    this.authService.login({ username, password, rememberMe })
     .subscribe({
       next: (res) => {
         this.router.navigate(['']);

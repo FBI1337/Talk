@@ -20,6 +20,10 @@ export class AuthService {
   token: string | null = null;
   refreshToken: string | null = null;
 
+  constructor() {
+    this.initAutoRefresh();
+  }
+
   get isAuth() {
     if (!this.token) {
       this.token = this.cookieService.get('token')
@@ -28,7 +32,7 @@ export class AuthService {
     return !!this.token;
   }
 
-  login(payload: { username: string, password: string}) {
+  login(payload: { username: string, password: string, rememberMe: boolean}) {
     const fd = new FormData();
 
     fd.append('username', payload.username)
@@ -38,7 +42,7 @@ export class AuthService {
       `${this.baseApiUrl}auth/token`,
       fd,
     ).pipe(
-      tap(val => this.saveTokens(val)),
+      tap(val => this.saveTokens(val, payload.rememberMe)),
     )
   }
 
@@ -75,6 +79,17 @@ export class AuthService {
     )
   }
 
+  requestPasswordReset(email: string){
+    return this.http.post(`${this.baseApiUrl}auth/forgot-password`, { email });
+  }
+
+  resetPassword(token: string, newPassword: string) {
+    return this.http.post(`${this.baseApiUrl}auth/reset-password`, {
+      token,
+      newPassword,
+    })
+  }
+
   logout() {
     this.cookieService.deleteAll()
     localStorage.clear(); 
@@ -85,12 +100,40 @@ export class AuthService {
   }
 
 
-  saveTokens(res: TokenResponse){
+  saveTokens(res: TokenResponse, rememberMe?: boolean){
     this.token = res.access_token;
     this.refreshToken = res.refresh_token;
 
-    this.cookieService.set('token', this.token)
-    this.cookieService.set('refreshToken', this.refreshToken)
+
+    if (rememberMe) {
+      console.log('long token', this.token)
+      console.log('long refreshToken', this.refreshToken)
+      this.cookieService.set('token', this.token, 7);
+      this.cookieService.set('refreshToken', this.refreshToken, 7);
+    } else {
+      this.cookieService.set('token', this.token);
+      this.cookieService.set('refreshToken', this.refreshToken);
+    }
+
+    
     localStorage.setItem('userId', res.userId)
+  }
+
+
+  private initAutoRefresh() {
+    this.isAuth;
+    if (this.refreshToken) {
+      setInterval(() => {
+        this.refreshAuthToken().subscribe({
+          next: () => {
+            console.log('Access token обновлен автоматически');
+          },
+          error: () => {
+            console.warn('Не удалось обновить токен. Разлогиниваем пользователя')
+            this.logout();
+          }
+        });
+      }, 15 * 60 * 1000)
+    }
   }
 }

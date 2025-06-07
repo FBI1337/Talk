@@ -9,6 +9,8 @@ import { SettingsPageComponent } from './pages/settings-page/settings-page.compo
 import { UsersPageComponent } from './pages/users-page/users-page.component';
 import { LogsPageComponent } from './pages/logs-page/logs-page.component';
 import { DatabasePageComponent } from './pages/database-page/database-page.component';
+import { ForgotPasswordPageComponent } from './pages/forgot-password-page/forgot-password-page.component';
+import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
 
 export const routes: Routes = [
     { 
@@ -25,7 +27,10 @@ export const routes: Routes = [
         ],
         canActivate: [canActivateAuth],
     },
-    {path: 'login', component: LoginPageComponent},
-    {path: 'register', component: RegisterPageComponent}
+    { path: 'login', component: LoginPageComponent},
+    { path: 'register', component: RegisterPageComponent},
+
+    { path: 'forgot-password', component: ForgotPasswordPageComponent},
+    { path: 'reset-password', component: ResetPasswordPageComponent }
 ];
 

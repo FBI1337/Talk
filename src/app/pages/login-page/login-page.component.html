@@ -87,11 +87,11 @@ class="login-form"
     
     <div class="line-label text-buttons mb32">
         <label class="custom-checkbox" for="remember">
-            <input type="checkbox" id="remember">
+            <input type="checkbox" id="remember" formControlName="rememberMe">
             <span class="checkmark"></span>
             Запомнить меня
         </label>
-        <div>
+        <div (click)="goToForgotPassword()">
             Восстановить пароль
         </div>
     </div>
