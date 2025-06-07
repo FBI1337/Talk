@@ -45,7 +45,7 @@ class="login-form"
         formControlName="username"
         class="tt-input input-err" type="text" placeholder="Введите логин">
 
-        <div *ngIf="form.get('username')?.invalid && form.get('username')?.touched" class="error tooltip regular">
+        <div *ngIf="form.get('username')?.invalid && form.get('username')?.touched && backendError()" class="error tooltip regular">
             <div *ngIf="form.get('username')?.errors?.['required']">Поля обязательно</div>
             <div *ngIf="form.get('username')?.errors?.['minlength']">Username должен иметь минимум 3 символа</div>
         </div>
@@ -76,7 +76,7 @@ class="login-form"
                 </svg>
             </button>
         </div>
-        <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="error tooltip regular">
+        <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched && backendError()" class="error tooltip regular">
             <span *ngIf="form.get('password')?.errors?.['required']">Поле обязательно</span>
         </div>
     </label>
