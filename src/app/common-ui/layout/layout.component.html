@@ -1,6 +1,12 @@
+<div class="layout-wrapper">
+    <app-sidebar [class.open]="isSidebarOpen"></app-sidebar>
 
-<app-sidebar></app-sidebar>
+    <div class="toggle-btn" (click)="toggleSidebar()">
+        <svg icon="menu"></svg>
+    </div>
 
-<div class="worckspace">
-    <router-outlet></router-outlet>
+
+    <div class="worckspace" [class.fullscreen]="!isSidebarOpen">
+        <router-outlet></router-outlet>
+    </div>
 </div>
