@@ -240,3 +240,29 @@ img {
     height: 84px;
     resize: none;
 }
+
+
+@media (max-width: 768px) {
+  .tt-form-label {
+    gap: 12px;
+  }
+
+  .tt-input {
+    font-size: 13px;
+    padding: 10px 16px;
+  }
+
+  .h1 {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .container, .wrapper {
+    padding: 0 16px;
+  }
+}
