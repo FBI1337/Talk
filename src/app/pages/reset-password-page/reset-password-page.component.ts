@@ -23,7 +23,7 @@ export class ResetPasswordPageComponent implements OnInit{
   token = this.route.snapshot.queryParamMap.get('token');
 
   form = new FormGroup({
-    newPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    newPassword: new FormControl('', [Validators.required, Validators.minLength(6), passwordStrengthValidator]),
     confirmPassword: new FormControl('', [Validators.required]),
   },
   {
@@ -46,6 +46,22 @@ export class ResetPasswordPageComponent implements OnInit{
       }
     })
   }
+
+
+  getPasswordClass(): string {
+  const control = this.form.get('password');
+
+  if (control?.hasError('passwordTooWeak') && (control.dirty || control.touched)) {
+    return 'tt-input input-error-weak';
+  }
+
+  if (control?.hasError('passwordWeak') && (control.dirty || control.touched)) {
+    return 'tt-input input-warning-weak';
+  }
+
+  return 'tt-input input-err';
+}
+
 
   message: string | null = null;
   error: string | null = null;
@@ -77,4 +93,23 @@ function passwordMatchValidator(control: AbstractControl): ValidationErrors | nu
   const password = control.get('newPassword')?.value;
   const confirm = control.get('confirmPassword')?.value;
   return password === confirm ? null : { passwordMismatch: true}
+}
+function passwordStrengthValidator(control: AbstractControl): ValidationErrors | null {
+  const value = control.value;
+  if(!value) return null;
+
+  let strength = 0
+
+  if (value.length >= 6) strength++;
+  if (/[A-Z]/.test(value)) strength++;
+  if (/[0-9]/.test(value)) strength++;
+  if (/[^A-Za-z0-9]/.test(value)) strength++;
+
+  if (strength <= 1) {
+    return { passwordTooWeak: true};
+  } else if ( strength === 2) {
+    return { passwordWeak: true}
+  }
+
+  return null;
 }

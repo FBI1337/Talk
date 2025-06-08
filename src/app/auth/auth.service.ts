@@ -46,7 +46,7 @@ export class AuthService {
     )
   }
 
-  register(payload: { username: string, firstName: string, lastName: string, email:string, password: string}) {
+  register(payload: { username: string, firstName: string, lastName: string, email:string, password: string, city: string}) {
     const fd = new FormData();
 
 
@@ -55,6 +55,7 @@ export class AuthService {
     fd.append('username', payload.username)
     fd.append('email', payload.email)
     fd.append('password', payload.password)
+    fd.append('city', payload.city)
 
     return this.http.post<TokenResponse>(
       `${this.baseApiUrl}auth/register`,

@@ -64,11 +64,39 @@ class="register-form"
     </label>
 
     <label class="tt-control-label input-label mb20">
+        Город
+        <input
+        type="text"
+        class="tt-input input-err"
+        formControlName="city"
+        placeholder="Введите город"
+        (input)="onCityInput($event)"
+        (blur)="onCityBlur()"
+        (focus)="onCityFocus()"
+        [attr.autocomplete]="'off'"
+        >
+
+        <ul *ngIf="filteredCities.length > 0 && cityFocused" class="dropdown-list">
+            <li
+            *ngFor="let city of filteredCities"
+            (click)="selectCity(city)"
+            class="dropdown-item"
+            >
+            {{ city }}
+            </li> 
+        </ul>
+
+        <div *ngIf="form.get('city')?.invalid && (form.get('city')?.touched || fromSubmitted)" class="error err-city tooltip regular">
+            <span *ngIf="form.get('city')?.errors?.['required']">Поле обязательно</span>
+        </div>
+    </label>
+
+    <label class="tt-control-label input-label mb20">
         Пароль
         <div class="password-input">
             <input
             formControlName="password"
-            class="tt-input input-err"
+            [ngClass]="getPasswordClass()"
             [type]="isPasswordVisible() ? 'text' : 'password'"
             placeholder="Введите пароль"
             >
@@ -87,8 +115,10 @@ class="register-form"
             </button>
         </div>
         <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched || form.get('password')?.dirty" class="error tooltip regular">
-            <span *ngIf="form.get('password')?.errors?.['required']">Поле обязательно</span>
-            <span *ngIf="form.get('password')?.errors?.['minlength']">Минимум 6 символов</span>
+            <span *ngIf="form.get('password')?.errors?.['required']">Поле обязательно<span></span></span>
+            <!-- <span *ngIf="form.get('password')?.errors?.['minlength']">Минимум 6 символов </span> -->
+            <span *ngIf="form.get('password')?.errors?.['passwordTooWeak']">Пароль слишком простой<span></span></span>
+            <span *ngIf="form.get('password')?.errors?.['passwordWeak']">Добавьте спецсимвол, цифру или заглавную букву<span></span></span>
         </div>
     </label>
 

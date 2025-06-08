@@ -44,10 +44,14 @@ class="login-form"
     </div>
     
     <label class="tt-control-label input-label mb20">
-        Username
+        Username/Email
         <input
         formControlName="username"
-        class="tt-input input-err" type="text" placeholder="Введите логин">
+        class="tt-input input-err"
+        [ngClass]="{ 'input-error' : backendError() }"
+        type="text"
+        placeholder="Введите логин/Email"
+        >
 
         <div *ngIf="form.get('username')?.invalid && form.get('username')?.touched" class="error tooltip regular">
             <div *ngIf="form.get('username')?.errors?.['required']">Поля обязательно</div>
@@ -62,6 +66,7 @@ class="login-form"
             <input
             formControlName="password"
             class="tt-input input-err"
+            [ngClass]="{ 'input-error' : backendError() }"
             [type]="isPasswordVisible() ? 'text' : 'password'"
             placeholder="Введите пароль"
             >
@@ -91,7 +96,7 @@ class="login-form"
             <span class="checkmark"></span>
             Запомнить меня
         </label>
-        <div (click)="goToForgotPassword()">
+        <div class="pointer" (click)="goToForgotPassword()">
             Восстановить пароль
         </div>
     </div>

@@ -1,10 +1,7 @@
-.not-found-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  text-align: center;
-  color: #fff;
-  background-color: #121212;
+:host {
+    display: flex;
+    height: 100dvh;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }
