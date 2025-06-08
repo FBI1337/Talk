@@ -11,6 +11,36 @@
     list-style: none;
 }
 
+.sidebar-togle-btn {
+    position: absolute;
+    top: 20px;
+    right: -48px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--dark-color);
+    border: none;
+    color: var(--light-color);
+    border-radius: 4px;
+    border: 1px solid var(--light-color);
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1001;
+
+    svg {
+        width: 16px;
+        height: 16px;
+        fill: var(--darck-color);
+    }
+
+
+    @media (min-width: 1024px) {
+        display: none;
+    }
+}
+
 .menu-item {
     padding: 16px 12px;
     cursor: pointer;
@@ -104,4 +134,33 @@
         text-decoration: none;
         color: var(--primary-color);
     }
+}
+
+
+@media (max-width: 768px) {
+    .scrolling {
+        flex: 1 1 auto;
+        overflow-y: auto;
+        padding-right: 0;
+    }
+
+    .sidebar-container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .sidebar__footer {
+        flex-shrink: 0;
+        position: relative;
+    }
+
+    .sidebar-container:not(.open) .scrolling {
+    overflow: hidden;
+  }
+
+  .adminbtn {
+    display: none;
+  }
 }

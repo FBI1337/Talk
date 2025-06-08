@@ -16,9 +16,5 @@ import { CommonModule } from '@angular/common';
     styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent {
-    isSidebarOpen = true;
-
-    toggleSidebar() {
-        this.isSidebarOpen = !this.isSidebarOpen;
-    }
+    
 }

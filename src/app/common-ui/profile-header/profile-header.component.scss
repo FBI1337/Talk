@@ -14,3 +14,19 @@ img {
     text-align: left;
     
 }
+
+
+@media (max-width: 768px) {
+    :host {
+        display: grid;
+        grid-template-columns: 112px 1fr;
+        grid-gap: 24px;
+        padding: 10px;
+    }
+
+    img {
+        width: 85px;
+        height: 85px;
+        border-radius: 50%;
+    }
+}

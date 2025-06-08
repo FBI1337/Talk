@@ -171,3 +171,66 @@
         background-color: var(--primary-color);
     }
 }
+
+
+
+@media (max-width: 768px) {
+  :host {
+    display: block;
+    margin: 0;
+    height: auto;
+    padding: 20px;
+  }
+
+  .login-form,
+  .register-form {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+
+  .big-logo {
+    display: none;
+  }
+
+  img {
+    display: none;
+  }
+  .buttoncolums {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .line-label {
+    gap: 10px;
+    align-items: center;
+  }
+
+  .password-eye-btn {
+    right: 8px;
+  }
+
+  .dropdown-list {
+    max-height: 120px;
+    font-size: 14px;
+  }
+
+  .tooltip {
+    font-size: 12px;
+  }
+
+  .error-block-wrapper {
+    padding: 0 10px;
+  }
+
+  h1.h1 {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

@@ -18,13 +18,22 @@ import { firstValueFrom } from 'rxjs';
     AsyncPipe,
     ImgUrlPipe
 ],
-    templateUrl: './sidebar.component.html',
-    styleUrls: ['./sidebar.component.scss']
+host: {
+    '[class.open]': 'isOpen'
+},
+templateUrl: './sidebar.component.html',
+styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
 
     profileService = inject(ProfileService)
     subscribers$ = this.profileService.getSubscribersShortList()
+
+    isOpen = false;
+
+    toggleSidebar() {
+        this.isOpen = !this.isOpen;
+    }
 
     me = this.profileService.me
 
