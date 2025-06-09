@@ -17,7 +17,7 @@
         <nav>
             <ul class="main-menu-list mb20">
                 <li *ngFor="let menuItem of menuItems">
-                    <a class="menu-item" [routerLink]="[menuItem.link]">
+                    <a class="menu-item" [routerLink]="[menuItem.link]" routerLinkActive="active">
                         <svg [icon]="menuItem.icon || 'default-icon'"></svg>
                         <span>{{ menuItem.label }}</span>
                     </a>
@@ -31,7 +31,7 @@
                 <ul class="main-menu-list mb20">
                     @for (route of adminRoutes; track route.link) {
                         <li>
-                            <a class="menu-item" [routerLink]="[route.link]">
+                            <a class="menu-item" [routerLink]="[route.link]" routerLinkActive="active">
                                 <svg [icon]="route.icon"></svg>
                                 <span>{{ route.label }}</span>
                             </a>

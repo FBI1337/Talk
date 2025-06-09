@@ -60,7 +60,7 @@
     text-decoration: none;
 
 
-
+    &.active,
     &:hover, 
     &:focus-visible {
         background: var(--darck-hover-color);

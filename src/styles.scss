@@ -206,6 +206,22 @@ img {
     color: var(--light-color);
 }
 
+.tt-input-post {
+    width: 100%;
+    display: block;
+    border: none;
+    outline: none;
+    user-select: none;
+    border-radius: 4px;
+    padding: 12px 20px;
+    background: var(--dark-color);
+    font-weight: 400;
+    font-size: 14px;
+    line-height:  21px;
+    font-family: 'JetBrains Mono', sans-serif;
+    color: var(--light-color);
+}
+
 .tt-form-label {
     display: flex;
     flex-direction: column;
