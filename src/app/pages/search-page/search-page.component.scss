@@ -1,4 +1,29 @@
-.profile-card__wrapper {
-    display: grid;
-    grid-gap: 8px;
+.search-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+
+  input {
+    width: 70%;
+    padding: 8px;
+    margin-right: 8px;
+  }
+
+  button {
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+
+  .error {
+    color: red;
+    margin-top: 10px;
+  }
+
+  ul {
+    margin-top: 16px;
+    li {
+      padding: 6px 0;
+      border-bottom: 1px solid #ddd;
+    }
+  }
 }

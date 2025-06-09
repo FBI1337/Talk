@@ -12,12 +12,17 @@ import { DatabasePageComponent } from './pages/database-page/database-page.compo
 import { ForgotPasswordPageComponent } from './pages/forgot-password-page/forgot-password-page.component';
 import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { ChatPageComponent } from './pages/chats-page/chat-page.component';
+import { SubscribersPageComponent } from './pages/subscribers-page/subscribers-page.component';
 export const routes: Routes = [
     { 
         path: '', component: LayoutComponent, children: [
             { path: '', component: SearchPageComponent },
             { path: 'profile/:id', component: ProfilePageComponent },
             { path: 'settings', component: SettingsPageComponent },
+            { path: 'chats', component: ChatPageComponent},
+            { path: 'search', component: SearchPageComponent},
+            { path: 'subscribers', component: SubscribersPageComponent},
 
 
             { path: 'admin/users', component: UsersPageComponent, canActivate: [canActivateRole(['admin1', 'admin2'])] },

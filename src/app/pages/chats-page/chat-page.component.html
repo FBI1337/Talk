@@ -1,0 +1,13 @@
+<div class="chat-page-wrapper">
+  <div class="user-list-column">
+    <app-user-list (userSelected)="onUserSelected($event)"></app-user-list>
+  </div>
+
+  <div class="chat-box-column">
+    <app-chat-box *ngIf="selectedUser" [selectedUser]="selectedUser"></app-chat-box>
+
+    <div *ngIf="!selectedUser" class="chat-placeholder">
+      Выберите пользователя, чтобы начать чат
+    </div>
+  </div>
+</div>

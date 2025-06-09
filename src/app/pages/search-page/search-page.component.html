@@ -1,5 +1,17 @@
-<div class="profile-card__wrapper">
-    @for (profile of profiles; track profile.id) {
-    <app-profile-card [profile]="profile"></app-profile-card>
-    }
+<div class="search-container">
+  <input type="text" [(ngModel)]="query" placeholder="Введите имя, фамилию или username" />
+  <button (click)="onSearch()">🔍 Искать</button>
+
+  <div *ngIf="loading">Поиск...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <ul *ngIf="results.length">
+    <li *ngFor="let user of results">
+      <strong>{{ user.username }}</strong> — {{ user.firstName }} {{ user.lastName }}
+    </li>
+  </ul>
+
+  <div *ngIf="!results.length && !loading && query">
+    Ничего не найдено.
+  </div>
 </div>

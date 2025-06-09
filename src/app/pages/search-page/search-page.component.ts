@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ProfileCardComponent } from 'src/app/common-ui/profile-card/profile-card.component';
 import { Profile } from 'src/app/data/intefaces/profile.interface';
 import { ProfileService } from 'src/app/data/services/profile.service';
@@ -9,37 +10,34 @@ import { ProfileService } from 'src/app/data/services/profile.service';
     standalone: true,
     imports: [
       ProfileCardComponent,
-      CommonModule
+      CommonModule,
+      FormsModule
     ],
     templateUrl: './search-page.component.html',
     styleUrls: ['./search-page.component.scss']
 })
-export class SearchPageComponent  implements OnInit{
-  profileService = inject(ProfileService);
-  profiles: Profile[] = []
+export class SearchPageComponent {
+  query = '';
+  results: any[] = [];
+  loading = false;
+  error: string | null = null;
 
+  constructor(private profileService: ProfileService) {}
 
-  trackById(index: number, profile: Profile) {
-    return profile.id;
-  }
+  onSearch() {
+    if (!this.query.trim()) return;
+    this.loading = true;
+    this.error = null;
 
-  ngOnInit(): void {
-
-    const userId = localStorage.getItem('userId')
-    this.profileService.setActive(true).subscribe();
-
-    window.addEventListener('beforeunload', () => {
-      if (userId) this.profileService.sendInactiveOnUnload(userId);
+    this.profileService.searchUsers(this.query).subscribe({
+      next: data => {
+        this.results = data;
+        this.loading = false;
+      },
+      error: err => {
+        this.error = 'Ошибка при поиске пользователей';
+        this.loading = false;
+      }
     });
-
-    setInterval(() => this.profileService.setActive(true).subscribe(), 30000)
   }
-
-
-  // constructor() {
-  //   this.profileService.getTestAccounts()
-  //   .subscribe(val => {
-  //     this.profiles = val
-  //   })
-  // }
 }

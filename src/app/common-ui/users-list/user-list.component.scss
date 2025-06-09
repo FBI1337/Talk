@@ -1,0 +1,37 @@
+.user-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+
+  .user-info {
+    .username {
+      font-weight: bold;
+    }
+
+    .fullname {
+      font-size: 0.9em;
+      color: gray;
+    }
+  }
+}

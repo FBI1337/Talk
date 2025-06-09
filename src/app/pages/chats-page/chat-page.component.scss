@@ -1,0 +1,27 @@
+.chat-page-wrapper {
+  display: flex;
+  height: calc(100vh - 60px); 
+  background: var(--dark-color);
+}
+
+.user-list-column {
+  width: 30%;
+  border-right: 1px solid #ccc;
+  background-color: var(--dark-color);
+  overflow-y: auto;
+}
+
+.chat-box-column {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: var(--dark-color);
+}
+
+.chat-placeholder {
+  margin: auto;
+  text-align: center;
+  color: #888;
+  font-size: 18px;
+}

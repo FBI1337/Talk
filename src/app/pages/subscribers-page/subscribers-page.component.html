@@ -1,0 +1,23 @@
+<div class="subscribers-page">
+  <h1 class="title">Подписчики</h1>
+
+  <div *ngIf="isLoading">Загрузка...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <div *ngIf="!isLoading && !error && subscribers.length === 0">
+    У вас пока нет подписчиков.
+  </div>
+
+  <div *ngIf="subscribers.length > 0" class="subscribers-list">
+    <div *ngFor="let profile of subscribers" class="subscriber-card">
+      <img
+        class="subscriber-avatar"
+        [src]="profile.avatarUrl | imgUrl"
+        [alt]="profile.lastName"
+      />
+      <strong class="subtitle">
+        {{ profile.firstName }} {{ profile.lastName }}
+      </strong>
+    </div>
+  </div>
+</div>

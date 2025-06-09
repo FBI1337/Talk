@@ -2,7 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Profile } from '../intefaces/profile.interface';
 import { Pageble } from '../intefaces/pageble.interface';
-import { map, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +35,38 @@ export class ProfileService {
     )
   }
 
+  getChatUsers(currentUserId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseApiUrl}chats/${currentUserId}`);
+  }
+
+
+  createOrGetChat(senderId: string, reciverId: string): Observable<any> {
+    return this.http.post<any>(`${this.baseApiUrl}chats/create-or-get`, {
+      senderId,
+      reciverId
+    })
+  }
+
+  getMessages(chatId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseApiUrl}chats/messages/${chatId}`);
+  }
+
+  sendMessage(message: {
+    chatId: string;
+    senderId: string;
+    text: string;
+  }): Observable<any> {
+    return this.http.post<any>(`${this.baseApiUrl}chats/messages`, message)
+  }
+
+  getFollowers(userId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseApiUrl}chats/${userId}/followers`);
+  }
+  
+
+  searchUsers(query: string): Observable<Profile[]>{
+    return this.http.get<Profile[]>(`${this.baseApiUrl}search/users?q=${encodeURIComponent(query)}`)
+  }
 
   getUserRole() {
     const user = this.me();
