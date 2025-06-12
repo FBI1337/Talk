@@ -1,0 +1,33 @@
+
+<div class="search-wrapper mb16">
+    <input
+    type="text"
+    class="search-input"
+    placeholder="Поиск по постам..."
+    ([ngModel])="searchQuery"
+    (input)="onSearch()"
+    >
+</div>
+
+
+<div class="block-wrapper mb16" *ngFor="let post of posts">
+    <div class="post-block">
+        <img [src]="'assets/imgs/avatar-placeholder.png'" >
+        <div class="post-all-content" [routerLink]="['/profile', post.userId._id]">
+            <div class="post-content mb8">
+                <div class="post-header mb20">
+                    <div class="post-header-content medium-text">
+                        <div class="title-post mb12">
+                            <div class="mr4 regular-bold">
+                                {{ post.userId.firstName }} {{ post.userId.lastName }}
+                            </div>
+                            <div class="ml4 medium-text text-color">
+                                {{ post.createdAt | timeAgo }}
+                            </div>
+                        </div>
+                        {{ post.content }}
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

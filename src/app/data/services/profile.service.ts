@@ -66,6 +66,12 @@ export class ProfileService {
      })
   }
 
+  getAllPost(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseApiUrl}posts/all`, {
+      responseType: 'json'
+    })
+  }
+
   addComment(commentData: { postId: string; userId: string; content: string}) {
     return this.http.post(`${this.baseApiUrl}comments/create-comment`, commentData);
   }

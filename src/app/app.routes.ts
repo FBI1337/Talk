@@ -14,15 +14,17 @@ import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-pa
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { ChatPageComponent } from './pages/chats-page/chat-page.component';
 import { SubscribersPageComponent } from './pages/subscribers-page/subscribers-page.component';
+import { TapePageComponent } from './pages/tape-page/tape-page.component';
 export const routes: Routes = [
     { 
         path: '', component: LayoutComponent, children: [
             { path: '', component: SearchPageComponent },
             { path: 'profile/:id', component: ProfilePageComponent },
             { path: 'settings', component: SettingsPageComponent },
-            { path: 'chats', component: ChatPageComponent},
-            { path: 'search', component: SearchPageComponent},
-            { path: 'subscribers', component: SubscribersPageComponent},
+            { path: 'chats', component: ChatPageComponent },
+            { path: 'search', component: SearchPageComponent },
+            { path: 'subscribers', component: SubscribersPageComponent },
+            { path: 'tape', component: TapePageComponent },
 
 
             { path: 'admin/users', component: UsersPageComponent, canActivate: [canActivateRole(['admin1', 'admin2'])] },

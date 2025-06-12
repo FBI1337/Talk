@@ -47,6 +47,11 @@ export class SidebarComponent {
             link: '/profile/me'
         },
         {
+            label: 'Лента',
+            icon: 'tape',
+            link: 'tape'
+        },
+        {
             label: 'Чаты',
             icon: 'chats',
             link: 'chats'
