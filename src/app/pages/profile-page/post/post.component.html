@@ -1,1 +1,46 @@
-<p>post works!</p>
+<div *ngIf="noPost">Увы но тут нет постов</div>
+
+<div *ngFor="let post of posts; let i = index" class="block-wrapper mb16">
+    <div class="post-block">
+        <img [src]="'assets/imgs/avatar-placeholder.png'" >
+        <div class="post-all-content">
+            <div class="post-content mb8">
+                <div class="post-header mb20">
+                    <div class="post-header-content medium-text">
+                        <div class="title-post mb12">
+                            <div class="mr4 regular-bold">
+                                {{ post.userId.firstName }} {{ post.userId.lastName }}
+                            </div>
+                            <div class="ml4 medium-text text-color">
+                                {{ post.createdAt | timeAgo }}
+                            </div>
+                        </div>
+                        {{ post.content }}
+                    </div>
+                    <div class="svg-btn">
+                        <svg icon="ellipsis"></svg>
+                    </div>
+                </div>
+
+                <div class="photo-block">
+                    <img *ngFor="let image of post.images" [src]="image">
+                </div>
+            </div>
+
+            <div class="post-btn mb8">
+                
+                <div 
+                class="left-btn"
+                [ngStyle]="{ 'color': activeCommentIndex === i ? 'var(--primary-color)' : 'var(--light-color)' }"
+                (click)="toggleComments(i)"
+                >
+                    <svg icon="comment"></svg>
+                </div>
+                <div class="right-btn">
+                    <svg icon="like"></svg>
+                </div>
+            </div>
+            <app-comment-feed *ngIf="activeCommentIndex === i" [postId]="post._id"></app-comment-feed>
+        </div>
+    </div>
+</div>

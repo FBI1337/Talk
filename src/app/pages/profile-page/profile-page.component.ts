@@ -18,7 +18,6 @@ import { map } from 'rxjs/operators';
     AsyncPipe,
     SvgIconComponent,
     RouterLink,
-    ImgUrlPipe,
     PostFeedComponent,
 ],
     templateUrl: './profile-page.component.html',

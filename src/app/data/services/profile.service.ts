@@ -47,6 +47,33 @@ export class ProfileService {
     })
   }
 
+  creatPost(content: string, userId: string): Observable<any>{
+    return this.http.post(`${this.baseApiUrl}posts/create-post`, {
+      content,
+      userId
+    })
+  }
+
+  getPost(userId?: string): Observable<any[]> {
+    const params: Record<string, string> = {};
+
+    if (userId) {
+      params['userId'] = userId;
+    }
+    return this.http.get<any[]>(`${this.baseApiUrl}posts/pulling-post`, { 
+      params,
+      responseType: 'json'
+     })
+  }
+
+  addComment(commentData: { postId: string; userId: string; content: string}) {
+    return this.http.post(`${this.baseApiUrl}comments/create-comment`, commentData);
+  }
+
+  getCommentsPost(postId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseApiUrl}comments/by-post/${postId}`)
+  }
+
   getMessages(chatId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseApiUrl}chats/messages/${chatId}`);
   }

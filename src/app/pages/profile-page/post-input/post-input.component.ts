@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { SvgIconComponent } from 'src/app/common-ui/svg-icon/svg-icon.component';
 import { Profile } from 'src/app/data/intefaces/profile.interface';
+import { ProfileService } from 'src/app/data/services/profile.service';
 import { ImgUrlPipe } from 'src/app/helpers/pipes/img-url.pipe';
 
 @Component({
@@ -9,12 +11,30 @@ import { ImgUrlPipe } from 'src/app/helpers/pipes/img-url.pipe';
   standalone: true,
   imports: [
     CommonModule,
-    ImgUrlPipe,
-    SvgIconComponent
+    SvgIconComponent,
+    FormsModule
   ],
   templateUrl: './post-input.component.html',
   styleUrl: './post-input.component.scss'
 })
 export class PostInputComponent {
+  postText: string = '';
 
+  constructor( private profileService: ProfileService) {}
+
+  submitPost() {
+    const content = this.postText.trim();
+    const userId = localStorage.getItem('userId');
+
+    if (!content || !userId) return;
+
+    this.profileService.creatPost(content, userId).subscribe({
+      next: () => {
+        this.postText = '';
+      },
+      error: (err) => {
+        console.error('Ошибка при отправке поста:', err);
+      }
+    })
+  }
 }

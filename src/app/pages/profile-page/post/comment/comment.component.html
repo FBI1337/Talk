@@ -1,0 +1,16 @@
+<div class="all-comment-content">
+    <div class="comment-content mb8">
+        <img [src]="'assets/imgs/avatar-placeholder.png'">
+        <div class="comment-text medium-text">
+            <div class="title-comment ">
+                <div class="nameSurname">
+                    {{ comment.userId.firstName }} {{ comment.userId.lastName }}
+                </div>
+                <div class="dateTime">
+                    {{ comment.createdAt | timeAgo }}
+                </div>                
+            </div>
+            {{ comment.content }}
+        </div>
+    </div>
+</div>

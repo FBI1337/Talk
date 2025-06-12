@@ -9,7 +9,6 @@ import { ProfileService } from 'src/app/data/services/profile.service';
     selector: 'app-search-page',
     standalone: true,
     imports: [
-      ProfileCardComponent,
       CommonModule,
       FormsModule
     ],

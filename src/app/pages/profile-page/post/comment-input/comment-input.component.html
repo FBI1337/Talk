@@ -4,15 +4,16 @@
         <input
         class="tt-input-post"
         type="text"
-        placeholder="Напишите что-нибудь"
-        [(ngModel)]="postText"
-        (keydown.enter)="submitPost()"
+        placeholder="Напишите комментарий"
+        [(ngModel)]="commentText"
+        [disabled]="isSending"
+        (keyup.enter)="sendComment()"
         >
     </div>
     <div class="right-columns">
         <svg class="svg-emoji" icon="smile"></svg>
 
-        <div class="btn-send" (click)="submitPost()">
+        <div class="btn-send" (click)="sendComment()" [class.disabled]="isSending">
             <svg class="svg-plane" icon="plane"></svg>
         </div>
     </div>
