@@ -22,7 +22,7 @@ export class UserListComponent implements OnInit{
 
     this.currentUserId = localStorage.getItem('userId');
     if (this.currentUserId) {
-      this.profileservice.getSubscribersShortList(3).subscribe({
+      this.profileservice.getMySubscribersShortList(3).subscribe({
         next: (res) => {
           this.users = res;
         },

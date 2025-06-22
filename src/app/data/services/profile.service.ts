@@ -97,8 +97,12 @@ export class ProfileService {
   searchUsers(query: string, city: string, stack: string[]): Observable<Profile[]>{
 
     const params: any = { q: query};
+    const userId = localStorage.getItem('userId');
+
+
     if (city.trim()) params.city = city;
     if (stack.length > 0) params.stack = stack.join(',');
+    if (userId) params.excludeUserId = userId;
 
     const queryString = new URLSearchParams(params).toString();
     return this.http.get<Profile[]>(`${this.baseApiUrl}search/users?${queryString}`)
@@ -111,18 +115,21 @@ export class ProfileService {
 
 
   //запрос на сервер для получения списка подписчиков
-  getSubscribersShortList(subsAmount = 3) {
-
-    const userId = localStorage.getItem('userId') || '';
+  getSubscribersShortList(userId: string, subsAmount = 3) {
 
     return this.http.get<Pageble<Profile>>(`${this.baseApiUrl}account/subscribers`, {
       params: {
-        userId: userId
+         userId
       }
     })
     .pipe(
       map( res => res.items.slice(0, subsAmount))
     )
+  }
+
+  getMySubscribersShortList(subsAmount = 3) {
+    const userId = localStorage.getItem('userId') || '';
+    return this.getSubscribersShortList(userId, subsAmount);
   }
 
   followUser(targetId: string) {

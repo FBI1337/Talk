@@ -16,6 +16,12 @@
                             </div>
                         </div>
                         {{ post.content }}
+
+                        <div class="tag mt8">
+                            <div class="skill-tag" *ngFor="let tag of post.tags">
+                                {{ tag }}
+                            </div>
+                        </div>
                     </div>
                     <div class="svg-btn">
                         <svg icon="ellipsis"></svg>

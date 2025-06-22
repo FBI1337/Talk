@@ -17,7 +17,7 @@ import { ProfileService } from 'src/app/data/services/profile.service';
     templateUrl: './search-page.component.html',
     styleUrls: ['./search-page.component.scss']
 })
-export class SearchPageComponent {
+export class SearchPageComponent implements OnInit{
   query = '';
   city = '';
   skillInput = '';
@@ -27,16 +27,21 @@ export class SearchPageComponent {
   loading = false;
   error: string | null = null;
   showFilters = false;
+  allUsers: Profile [] = [];
 
   constructor(private profileService: ProfileService) {}
 
   onSearch() {
-    if (!this.query.trim() && !this.city.trim() && this.selectedSkills.length === 0) {
-      this.error = 'Введите параметры для поиска'
-      return;
-    };
+
     this.loading = true;
     this.error = null;
+
+    const userId = localStorage.getItem('userId');
+
+    if (!userId) {
+      this.error = 'Ошибка: пользователь не найден';
+      return;
+    }
 
     this.profileService.searchUsers(this.query, this.city, this.selectedSkills).subscribe({
       next: data => {
@@ -72,5 +77,11 @@ export class SearchPageComponent {
 
   removeSkill(tag: string) {
     this.selectedSkills = this.selectedSkills.filter(t => t !== tag)
+  }
+
+
+
+  ngOnInit(): void {
+    this.onSearch();
   }
 }

@@ -20,7 +20,7 @@ export class SubscribersPageComponent {
   constructor(private profileService: ProfileService) {}
 
   ngOnInit(): void {
-    this.profileService.getSubscribersShortList(10).subscribe({
+    this.profileService.getMySubscribersShortList(10).subscribe({
       next: (data) => {
         this.subscribers = data;
         this.isLoading = false;

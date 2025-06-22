@@ -24,15 +24,18 @@
         </app-post-feed>
 
         <div class="block-not-mobile">
-            <h3 class="h6 mb16"> Подписчики</h3>
-            <div class="subscribers-wrapper mb32">
-                @for (subscriber of subscribers$ | async; track subscriber.id) {
-                    <a class="subscriber-avatar-btn" [routerLink]="['/profile', subscriber.id]">
-                        <img [src]="'assets/imgs/avatar-placeholder.png'" />
-                    </a>
-                }
-                <a class="to-subscribers-search" [routerLink]="['/search']"></a>
-            </div>
+
+            @if (isOwnProfile$ | async) {
+                <h3 class="h6 mb16"> Подписчики</h3>
+                <div class="subscribers-wrapper mb32">
+                    @for (subscriber of subscribers$ | async; track subscriber.id) {
+                        <a class="subscriber-avatar-btn" [routerLink]="['/profile', subscriber.id]">
+                            <img [src]="'assets/imgs/avatar-placeholder.png'" />
+                        </a>
+                    }
+                    <a class="to-subscribers-search" [routerLink]="['/search']"></a>
+                </div>
+            }
 
 
             <h3 class="h6 mb16"> Навыки</h3>

@@ -30,19 +30,18 @@ export class ProfilePageComponent implements OnInit {
     route = inject(ActivatedRoute)
 
     me$ = toObservable(this.profileService.me)
-    subscribers$ = this.profileService.getSubscribersShortList(5)
-
+    
     isSubscribed = false;
     currentProfile: string | null = null;
     cdr = inject(ChangeDetectorRef);
-
+    
     profile$ = this.route.params
     .pipe (
         switchMap(({ id }) => id === 'me'
         ? this.me$
         : this.profileService.getAccount(id)
-        ),
-        map((profile: Profile | null) => {
+    ),
+    map((profile: Profile | null) => {
             if(!profile) return {} as Profile & { skillsArray: string[] };
             
             return {
@@ -51,11 +50,17 @@ export class ProfilePageComponent implements OnInit {
             };
         })
     )
-
+    subscribers$ = this.profile$.pipe(
+        switchMap(profile => {
+            if(!profile?.id) return []
+            return this.profileService.getSubscribersShortList(String(profile.id), 5)
+        })
+    )
+    
     isOwnProfile$ = combineLatest([this.profile$, this.me$]).pipe(
         map(([profile, me]) => profile?.id === me?.id)
     );
-
+    
     onSubscribe(userId: string | undefined) {
         if (!userId) return;
 

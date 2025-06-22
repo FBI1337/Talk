@@ -28,7 +28,7 @@ styleUrls: ['./sidebar.component.scss']
 export class SidebarComponent {
 
     profileService = inject(ProfileService)
-    subscribers$ = this.profileService.getSubscribersShortList()
+    subscribers$ = this.profileService.getMySubscribersShortList(3)
 
     isOpen = false;
 
