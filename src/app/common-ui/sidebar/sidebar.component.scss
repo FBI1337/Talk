@@ -1,8 +1,16 @@
 :host { 
- display: block;
- padding: 20px 12px;
- position: relative;
- background-color: var(--darck-color);
+    display: block;
+    padding: 20px 12px;
+    height: 100%;
+    background-color: var(--darck-color);
+    width: 300px;
+}
+
+
+.sidebar-container {
+    position: fixed;
+    height: 100%;
+    width: 300px;
 }
 
 .main-menu-list { 

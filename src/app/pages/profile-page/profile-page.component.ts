@@ -4,11 +4,12 @@ import { ProfileService } from 'src/app/data/services/profile.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { combineLatest, switchMap } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop'; 
-import { AsyncPipe, JsonPipe, NgForOf } from '@angular/common';
+import { AsyncPipe, CommonModule, JsonPipe, NgForOf } from '@angular/common';
 import { SvgIconComponent } from "../../common-ui/svg-icon/svg-icon.component";
 import { ImgUrlPipe } from 'src/app/helpers/pipes/img-url.pipe';
 import { PostFeedComponent } from './post-feed/post-feed.component';
 import { map } from 'rxjs/operators';
+import { Profile } from 'src/app/data/intefaces/profile.interface';
 
 @Component({
     selector: 'app-profile-page',
@@ -19,6 +20,7 @@ import { map } from 'rxjs/operators';
     SvgIconComponent,
     RouterLink,
     PostFeedComponent,
+    CommonModule
 ],
     templateUrl: './profile-page.component.html',
     styleUrls: ['./profile-page.component.scss'],
@@ -39,7 +41,15 @@ export class ProfilePageComponent implements OnInit {
         switchMap(({ id }) => id === 'me'
         ? this.me$
         : this.profileService.getAccount(id)
-        )
+        ),
+        map((profile: Profile | null) => {
+            if(!profile) return {} as Profile & { skillsArray: string[] };
+            
+            return {
+                ...profile,
+                skillsArray: profile.stack
+            };
+        })
     )
 
     isOwnProfile$ = combineLatest([this.profile$, this.me$]).pipe(

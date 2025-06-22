@@ -1,12 +1,41 @@
 
 <div class="search-wrapper mb16">
-    <input
-    type="text"
-    class="search-input"
-    placeholder="Поиск по постам..."
-    ([ngModel])="searchQuery"
-    (input)="onSearch()"
-    >
+
+
+    <div class="search-row">
+        <div class="search-line">
+            <input
+            type="text"
+            class="search-input"
+            placeholder="Поиск по постам..."
+            [(ngModel)]="searchQuery"
+            (input)="onSearch()"
+            >
+            
+            <button class="filter-btn" (click)="toggleFilters()">
+                <svg icon="funnel"></svg>
+            </button>
+        </div>
+        
+
+        <div class="skill-line mt8">
+            <div class="skill-tag tag mt8" *ngFor="let tag of selectedTags">
+                <span class="remove-tag" (click)="removeTag(tag)"><svg icon="cross"></svg></span>
+                {{ tag }}
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="showFilters" class="filters-block regular mt16">
+        <input
+        type="text"
+        class="tag-input"
+        placeholder="Введите тег и нажмите Enter"
+        [(ngModel)]="tagInput"
+        (keydown.enter)="addTag($event)"
+        >
+    </div>
 </div>
 
 
@@ -25,9 +54,19 @@
                                 {{ post.createdAt | timeAgo }}
                             </div>
                         </div>
-                        {{ post.content }}
+                        <div class="mb8" [innerHTML]="post.content | hightlight:searchQuery"></div>
+
+
+                        <div class="tag-wrapper">
+                            <div class="tag" *ngFor="let tag of post.tags">
+                                <div class="skill-tag" [ngClass]="{ 'hightlighted-tag' : selectedTags.includes(tag) }">
+                                    {{ tag }}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 </div>

@@ -34,7 +34,38 @@
     .btn-send {
         width: 40px;
         height: 40px;
+        border: 1px solid var(--dark-color);
         align-items: center;
         background-color: var(--primary-color);
+        position: relative;
+        transition: all ease;
+
+        &:active {
+            transform: translate(2px 2px);
+            background: var(--dark-primary-color);
+        }
+    }
+
+    .btn-send-shadow {
+        position: relative;
+        transition: all ease;
+
+        &::before {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            bottom: -4px;
+            right: -4px;
+            height: 100%;
+            width: 100%;
+            background: var(--gray-color);
+            transition: all ease;
+        }
+
+        &:active::before {
+            background-color: var(--dark-primary-color);
+            bottom: -2px;
+            right: -2px;
+        }
     }
 }

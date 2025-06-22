@@ -47,11 +47,8 @@ export class ProfileService {
     })
   }
 
-  creatPost(content: string, userId: string): Observable<any>{
-    return this.http.post(`${this.baseApiUrl}posts/create-post`, {
-      content,
-      userId
-    })
+  creatPost( postData: {content: string, userId: string, onlyFollowers?: boolean, tags?: string[]}): Observable<any>{
+    return this.http.post(`${this.baseApiUrl}posts/create-post`, postData)
   }
 
   getPost(userId?: string): Observable<any[]> {
@@ -164,9 +161,12 @@ export class ProfileService {
   }
 
   patchProfile(profile: Partial<Profile>) {
+
+    const userId = localStorage.getItem('userId');
+
     return this.http.patch<Profile>(
       `${this.baseApiUrl}account/me`,
-      profile
+      { ...profile, userId}
     )
   }
 

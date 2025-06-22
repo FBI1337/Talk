@@ -27,9 +27,10 @@
 }
 
 body {
-    height: 100dvh;
+    height: 100%;
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     font-family: 'JetBrains Mono', sans-serif;
     background-color: var(--dark-color);
     color: var(--light-color);
@@ -207,7 +208,7 @@ img {
 }
 
 .tt-input-post {
-    width: 95dvh;
+    width: 85dvh;
     display: block;
     border: none;
     outline: none;
@@ -281,4 +282,16 @@ img {
   .container, .wrapper {
     padding: 0 16px;
   }
+}
+
+
+.highlight {
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+    font-weight: bold;
+}
+
+.hightlighted-tag {
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
 }

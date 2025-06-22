@@ -11,6 +11,50 @@
 .left-columns {
     display: flex;
     align-items: center;
+    gap: 12px;
+
+
+    .input-post {
+        display: flex;
+        flex-direction: column;
+
+
+        .checkbox-label {
+            display: flex;
+            gap: 10px;
+        }
+
+
+        .label {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            gap: 10px;
+
+            .tt-tags-input {
+                width: 60dvh;
+                display: block;
+                border: none;
+                border-bottom: 1px solid var(--light-color);
+                outline: none;
+                user-select: none;
+                padding: 12px 20px;
+                background: var(--dark-color);
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 21px;
+                font-family: 'JetBrains Mono', sans-serif;
+                color: var(--light-color);
+                &:focus {
+                    outline: none;
+                    border-bottom: 1px solid var(--primary-color);
+                    transition: border-bottom 0.3s ease-in;
+                }
+            }
+        }
+    }
+
+    
 }
 
 .right-columns {
@@ -33,7 +77,38 @@
     .btn-send {
         width: 40px;
         height: 40px;
+        border: 1px solid var(--dark-color);
         align-items: center;
         background-color: var(--primary-color);
+        position: relative;
+        transition: all ease;
+
+        &:active {
+            transform: translate(2px 2px);
+            background: var(--dark-primary-color);
+        }
+    }
+
+    .btn-send-shadow {
+        position: relative;
+        transition: all ease;
+
+        &::before {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            bottom: -4px;
+            right: -4px;
+            height: 100%;
+            width: 100%;
+            background: var(--gray-color);
+            transition: all ease;
+        }
+
+        &:active::before {
+            background-color: var(--dark-primary-color);
+            bottom: -2px;
+            right: -2px;
+        }
     }
 }

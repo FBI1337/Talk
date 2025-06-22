@@ -1,19 +1,40 @@
 <div class="tt-input input-block-wrapper">
     <div class="left-columns">
         <img [src]="'assets/imgs/avatar-placeholder.png'">
-        <input
-        class="tt-input-post"
-        type="text"
-        placeholder="Напишите что-нибудь"
-        [(ngModel)]="postText"
-        (keydown.enter)="submitPost()"
-        >
+
+        <div class="input-post">
+            <input
+            class="tt-input-post mb8"
+            type="text"
+            placeholder="Напишите что-нибудь"
+            [(ngModel)]="postText"
+            (keydown.enter)="submitPost()"
+            >
+
+            <div class="label">
+                <input
+                class="tt-tags-input"
+                type="text"
+                placeholder="Стеки (через запятую)"
+                [(ngModel)]="postTags"
+                >
+        
+                <label class="checkbox-label">
+                    <input
+                    type="checkbox"
+                    [(ngModel)]="onlyFollowers"
+                    >
+                    Только для подписчиков
+                </label>
+            </div>
+    
+        </div>
     </div>
     <div class="right-columns">
         <svg class="svg-emoji" icon="smile"></svg>
 
-        <div class="btn-send" (click)="submitPost()">
+        <button class="btn-send btn-send-shadow" (click)="submitPost()">
             <svg class="svg-plane" icon="plane"></svg>
-        </div>
+        </button>
     </div>
 </div>

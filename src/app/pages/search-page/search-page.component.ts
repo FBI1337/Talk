@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProfileCardComponent } from 'src/app/common-ui/profile-card/profile-card.component';
+import { SvgIconComponent } from 'src/app/common-ui/svg-icon/svg-icon.component';
 import { Profile } from 'src/app/data/intefaces/profile.interface';
 import { ProfileService } from 'src/app/data/services/profile.service';
 
@@ -10,7 +11,8 @@ import { ProfileService } from 'src/app/data/services/profile.service';
     standalone: true,
     imports: [
       CommonModule,
-      FormsModule
+      FormsModule,
+      SvgIconComponent,
     ],
     templateUrl: './search-page.component.html',
     styleUrls: ['./search-page.component.scss']

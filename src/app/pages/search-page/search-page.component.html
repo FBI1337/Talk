@@ -1,17 +1,51 @@
-<div class="search-container">
-  <input type="text" [(ngModel)]="query" placeholder="Введите имя, фамилию или username" />
-  <button (click)="onSearch()">🔍 Искать</button>
+<div class="search-container regular mb16">
+  <input class="input-search" type="text" [(ngModel)]="query" placeholder="Введите имя, фамилию или username" />
 
-  <div *ngIf="loading">Поиск...</div>
-  <div *ngIf="error" class="error">{{ error }}</div>
-
-  <ul *ngIf="results.length">
-    <li *ngFor="let user of results">
-      <strong>{{ user.username }}</strong> — {{ user.firstName }} {{ user.lastName }}
-    </li>
-  </ul>
-
-  <div *ngIf="!results.length && !loading && query">
-    Ничего не найдено.
+  <div class="right-column">
+    <button class="search-btn" (click)="onSearch()"><svg icon="magnifier"></svg></button>
+  
+    <button class="filter-btn"><svg icon="funnel"></svg></button>
   </div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+  
+  
 </div>
+
+<div class="loading" *ngIf="loading">Поиск...</div>
+
+<div class="notfound" *ngIf="!results.length && !loading && query">
+  Ничего не найдено.
+</div>
+
+<ul class="mt70" *ngIf="results.length">
+  <div class="block-result  mb12" *ngFor="let user of results">
+
+    <div class="profile-info mr32">
+      <img [src]="'assets/imgs/avatar-placeholder.png'">
+      <div class="pfofile-name">
+        <div class="fio h6">{{ user.firstName }} {{ user.lastName }}</div>
+        <div class="username regular">{{ user.username }}</div>
+      </div>
+    </div>
+
+    <div class="profile-description medium-text mr32">
+      {{ user.description }}
+    </div>
+
+    <div class="profile-stack mr32">
+      @for (skill of user.stack; track skill) {
+        <div class="skill-tag">
+          {{ skill }}
+        </div>
+      }
+    </div>
+
+    <div class="profile-btn mr32">
+      <button class="go-profile">
+        <svg icon="rightuparrow"></svg>
+      </button>
+      <button>123</button>
+      <button>123</button>
+    </div>
+  </div>
+</ul>
