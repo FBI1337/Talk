@@ -5,6 +5,7 @@
     <div class="search-row">
         <div class="search-line">
             <input
+            *ngIf="!showFilters"
             type="text"
             class="search-input"
             placeholder="Поиск по постам..."
@@ -12,13 +13,23 @@
             (input)="onSearch()"
             >
             
-            <button class="filter-btn" (click)="toggleFilters()">
+            <ng-container *ngIf="showFilters">
+                <input
+                type="text"
+                class="tag-input"
+                placeholder="Введите тег и нажмите Enter"
+                [(ngModel)]="tagInput"
+                (keydown.enter)="addTag($event)"
+                >
+            </ng-container>
+
+            <button class="filter-btn" (click)="toggleFilters()" [ngClass]="{'active' : showFilters}">
                 <svg icon="funnel"></svg>
             </button>
         </div>
         
 
-        <div class="skill-line mt8">
+        <div class="skill-line mt8"  *ngIf="selectedTags.length > 0 && showFilters">
             <div class="skill-tag tag mt8" *ngFor="let tag of selectedTags">
                 <span class="remove-tag" (click)="removeTag(tag)"><svg icon="cross"></svg></span>
                 {{ tag }}
@@ -27,15 +38,6 @@
     </div>
 
 
-    <div *ngIf="showFilters" class="filters-block regular mt16">
-        <input
-        type="text"
-        class="tag-input"
-        placeholder="Введите тег и нажмите Enter"
-        [(ngModel)]="tagInput"
-        (keydown.enter)="addTag($event)"
-        >
-    </div>
 </div>
 
 

@@ -94,8 +94,14 @@ export class ProfileService {
   }
   
 
-  searchUsers(query: string): Observable<Profile[]>{
-    return this.http.get<Profile[]>(`${this.baseApiUrl}search/users?q=${encodeURIComponent(query)}`)
+  searchUsers(query: string, city: string, stack: string[]): Observable<Profile[]>{
+
+    const params: any = { q: query};
+    if (city.trim()) params.city = city;
+    if (stack.length > 0) params.stack = stack.join(',');
+
+    const queryString = new URLSearchParams(params).toString();
+    return this.http.get<Profile[]>(`${this.baseApiUrl}search/users?${queryString}`)
   }
 
   getUserRole() {

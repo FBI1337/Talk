@@ -65,15 +65,17 @@ export class TapePageComponent implements OnInit {
   addTag(event: Event) {
     event.preventDefault();
 
-    const keboardEvent = event as KeyboardEvent;
-    const input = event.target as HTMLImageElement;
-    const tag = this.tagInput.trim();
+    const input = this.tagInput.trim()
+    if (!input) return;
 
-    if (tag && !this.selectedTags.includes(tag)) {
-      this.selectedTags.push(tag); 
-      this.tagInput = '';
-      this.onSearch();
-    }
+    const tags = input
+    .split(',')
+    .map(tag => tag.trim())
+    .filter(tag => tag.length > 0 && !this.selectedTags.includes(tag));
+    
+    this.tagInput = '';
+    this.selectedTags.push(...tags);
+    this.onSearch();
   }
 
   removeTag(tag: string) {

@@ -1,15 +1,60 @@
 <div class="search-container regular mb16">
-  <input class="input-search" type="text" [(ngModel)]="query" placeholder="Введите имя, фамилию или username" />
 
-  <div class="right-column">
-    <button class="search-btn" (click)="onSearch()"><svg icon="magnifier"></svg></button>
-  
-    <button class="filter-btn"><svg icon="funnel"></svg></button>
+  <div class="search-row">
+
+    <input
+    *ngIf="!showFilters"
+    class="input-search"
+    type="text"
+    [ngClass]="{ 'error' : error }"
+    [(ngModel)]="query"
+    placeholder="Введите имя, фамилию или username"
+    />
+    <ng-container *ngIf="showFilters">
+      <input
+      type="text"
+      class="input-filter-city"
+      [ngClass]="{ 'error' : error }"
+      [(ngModel)]="city"
+      placeholder="Введите город"
+      >
+      <input
+      type="text"
+      class="input-filter-skill"
+      [ngClass]="{ 'error' : error }"
+      [(ngModel)]="skillInput"
+      (keydown.enter)="addSkill($event)"
+      placeholder="Введите навыки"
+      >
+    </ng-container> 
+
+    <div class="right-column">
+      <button
+      class="search-btn"
+      (click)="onSearch()"
+      >
+      <svg icon="magnifier"></svg></button>  
+      <button
+      [ngClass]="{'active' : showFilters}"
+      class="filter-btn"
+      (click)="toggleFilters()"
+      >
+      <svg icon="funnel"></svg></button>
+    </div>
+
   </div>
+  <div class="skill-line mt8" *ngIf="selectedSkills.length > 0 && showFilters">
+    <div class="skill-tag tag mt8" *ngFor="let tag of selectedSkills">
+      <span class="remove-tag" (click)="removeSkill(tag)"><svg icon="cross"></svg></span>
+      {{ tag }}
+    </div>
+  </div>
+
   <div *ngIf="error" class="error">{{ error }}</div>
-  
-  
 </div>
+
+
+
 
 <div class="loading" *ngIf="loading">Поиск...</div>
 
@@ -17,7 +62,7 @@
   Ничего не найдено.
 </div>
 
-<ul class="mt70" *ngIf="results.length">
+<ul class="mt80" *ngIf="results.length">
   <div class="block-result  mb12" *ngFor="let user of results">
 
     <div class="profile-info mr32">
@@ -34,7 +79,7 @@
 
     <div class="profile-stack mr32">
       @for (skill of user.stack; track skill) {
-        <div class="skill-tag">
+        <div class="skill-tag" [ngClass]="{ 'hightlighted-tag' : selectedSkills.includes(skill) }">
           {{ skill }}
         </div>
       }

@@ -1,92 +1,149 @@
 .search-container {
-  background-color: var(--dark-color);
-  border: 1px solid var(--light-color);
-  justify-content: center;
-  gap: 10px;
-  display: flex;
+  display: block;
+  margin: 5px;
   position: fixed;
   padding: 10px;
   top: 5px;
-  margin: 5px;
   left: 33%;
-
-  .input-search {
-    background: none;
-    border: none;
-    border-bottom: 1px solid var(--light-color);
-    outline: none;
-    color: var(--light-color);
-    width: 90dvh;
-  }
-
-
-  .right-column {
-
+  z-index: 1;
+  width: 50%;
+  background-color: var(--dark-color);
+  border: 1px solid var(--light-color);
+  gap: 10px;
+  
+  .search-row {
     display: flex;
     gap: 10px;
+
+
+    .input-search.error,
+    .input-filter-city.error,
+    .input-filter-skill.error {
+      border-bottom: 1px solid var(--error-color) !important;
+    }   
     
-    .search-btn {
-      display: flex ;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      width: 40px;
-      height: 40px;
+    .error-border {
+      border: none;
+      border-bottom: 1px solid var(--error-color);
+    }
+    
+    .input-search, 
+    .input-filter-city,
+    .input-filter-skill {
       background: none;
-      border: 1px solid var(--light-color);
-      transition: background-color 0.2s ease;
-  
-      &:hover {
-        background-color:  var(--primary-color);
+      border: none;
+      border-bottom: 1px solid var(--light-color);
+      outline: none;
+      color: var(--light-color);
+      width: 90dvh;
+      padding: 10px 16px;
+      font-size: 14px;
+      
+      &:focus {
+        outline: none;
+        border-bottom: 1px solid var(--primary-color) !important;
+        transition: border-bottom 0.3s ease-in;
       }
+    }   
+
+    .right-column {
   
-      &:active {
-        background-color: var(--primary-color);
-      }
-  
-      svg {
-        width: 16px;
-        height: 16px;
+      display: flex;
+      gap: 10px;
+      
+      .search-btn {
+        display: flex ;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
-        color: var(--light-color);
+        width: 40px;
+        height: 40px;
+        background: none;
+        border: 1px solid var(--light-color);
+        transition: background-color 0.2s ease;
+    
+        &:hover {
+          background-color:  var(--primary-color);
+        }
+    
+        &:active {
+          background-color: var(--primary-color);
+        }
+    
+        svg {
+          width: 16px;
+          height: 16px;
+          cursor: pointer;
+          color: var(--light-color);
+        }
+      }
+  
+      .filter-btn {
+        display: flex ;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        background: none;
+        border: 1px solid var(--light-color);
+        transition: background-color 0.2s ease;
+        
+        
+        &:hover {
+          background-color:  var(--primary-color);
+        }
+  
+  
+        &.active {
+          background-color: var(--primary-color);
+        }
+  
+        svg {
+          width: 18px;
+          height: 18px;
+          color: var(--light-color);
+        }
       }
     }
-
-    .filter-btn {
-      display: flex ;
+    
+    
+  }
+  .skill-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 10dvh;
+    .tag {
+      display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      width: 40px;
-      height: 40px;
-      background: none;
-      border: 1px solid var(--light-color);
-      transition: background-color 0.2s ease;
-      
-      
-      &:hover {
-        background-color:  var(--primary-color);
-      }
+      width: 100%;
+    }
 
-
-      &:active {
-        background-color: var(--primary-color);
-      }
+    .remove-tag {
+      display: flex;
+      flex-direction: column;
 
       svg {
-        width: 18px;
-        height: 18px;
-        color: var(--light-color);
+        width: 16px;
+        height: 10px;
+
+
+        &:hover {
+          color: var(--error-color);
+        }
       }
     }
   }
-
-
+  
   .error {
     color: red;
     margin-top: 10px;
   }
 }
+
+
 
 
 .loading {

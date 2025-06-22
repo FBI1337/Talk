@@ -19,18 +19,26 @@ import { ProfileService } from 'src/app/data/services/profile.service';
 })
 export class SearchPageComponent {
   query = '';
+  city = '';
+  skillInput = '';
+  selectedSkills: string[] = [];
+
   results: any[] = [];
   loading = false;
   error: string | null = null;
+  showFilters = false;
 
   constructor(private profileService: ProfileService) {}
 
   onSearch() {
-    if (!this.query.trim()) return;
+    if (!this.query.trim() && !this.city.trim() && this.selectedSkills.length === 0) {
+      this.error = 'Введите параметры для поиска'
+      return;
+    };
     this.loading = true;
     this.error = null;
 
-    this.profileService.searchUsers(this.query).subscribe({
+    this.profileService.searchUsers(this.query, this.city, this.selectedSkills).subscribe({
       next: data => {
         this.results = data;
         this.loading = false;
@@ -40,5 +48,29 @@ export class SearchPageComponent {
         this.loading = false;
       }
     });
+  }
+
+  toggleFilters() {
+    this.showFilters = !this.showFilters;
+  }
+
+
+  addSkill(event: Event) {
+    event.preventDefault();
+
+    const input = this.skillInput.trim()
+    if (!input) return;
+
+    const tags = input
+    .split(',')
+    .map(tag => tag.trim())
+    .filter(tag => tag.length > 0 && !this.selectedSkills.includes(tag));
+
+    this.selectedSkills.push(...tags)
+    this.skillInput = '';
+  }
+
+  removeSkill(tag: string) {
+    this.selectedSkills = this.selectedSkills.filter(t => t !== tag)
   }
 }
