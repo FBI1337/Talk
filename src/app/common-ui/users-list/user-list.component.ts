@@ -24,7 +24,11 @@ export class UserListComponent implements OnInit{
     if (this.currentUserId) {
       this.profileservice.getMySubscribersShortList(3).subscribe({
         next: (res) => {
-          this.users = res;
+          console.log('Подписчики: ', res)
+          this.users = res.map(user => ({
+            ...user,
+            _id: user.id
+          }));
         },
         error: (err) => {
           console.error('Ошибка загрузки подписчиков:', err);

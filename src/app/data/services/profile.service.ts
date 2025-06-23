@@ -40,15 +40,19 @@ export class ProfileService {
   }
 
 
-  createOrGetChat(senderId: string, reciverId: string): Observable<any> {
+  createOrGetChat(senderId: string, receiverId: string): Observable<any> {
     return this.http.post<any>(`${this.baseApiUrl}chats/create-or-get`, {
       senderId,
-      reciverId
+      receiverId
     })
   }
 
   creatPost( postData: {content: string, userId: string, onlyFollowers?: boolean, tags?: string[]}): Observable<any>{
     return this.http.post(`${this.baseApiUrl}posts/create-post`, postData)
+  }
+
+  deletePost(postId: string) {
+    return this.http.delete(`${this.baseApiUrl}posts/delete-post/${postId}`);
   }
 
   getPost(userId?: string): Observable<any[]> {

@@ -4,13 +4,15 @@ import { CommentFeedComponent } from './comment-feed/comment-feed.component';
 import { ProfileService } from 'src/app/data/services/profile.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { TimeAgoPipe } from 'src/app/helpers/pipes/time-ago.pipe';
-import { CommonModule } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { combineLatest, map, switchMap } from 'rxjs';
+
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [ SvgIconComponent, CommentFeedComponent, TimeAgoPipe, CommonModule ],
+  imports: [ SvgIconComponent, CommentFeedComponent, TimeAgoPipe, CommonModule, AsyncPipe ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
 })
@@ -19,6 +21,19 @@ export class PostComponent implements OnInit {
   posts: any[] = []
   noPost = false;
   activeCommentIndex: number | null = null;
+  activeMenuIndex: number | null = null;
+  me$ = toObservable(this.profileService.me)
+  
+  profile$ = this.route.params
+  .pipe (
+    switchMap(({ id }) => id === 'me'
+    ? this.me$
+    : this.profileService.getAccount(id)
+  ))
+  
+  isOwnProfile$ = combineLatest([this.profile$, this.me$]).pipe(
+    map(([profile, me]) => profile?.id === me?.id)
+  );
 
   constructor(
     private profileService: ProfileService,
@@ -50,8 +65,33 @@ export class PostComponent implements OnInit {
       }
     })
   }
+  deletePost(postId: string) {
+    if (!postId) return;
+
+    this.profileService.deletePost(postId).subscribe({
+      next: () => {
+        const userId = localStorage.getItem('userId') || this.route.snapshot.paramMap.get('id')
+
+        if (userId) this.fetchPosts(userId);
+      },
+      error: (err) => {
+        console.error('Ошибка при удалении поста: ', err);
+      }
+    });
+
+    this.activeMenuIndex = null;
+  }
 
   toggleComments(index: number) {
     this.activeCommentIndex = this.activeCommentIndex === index ? null : index;
   }
+
+  updatePosts(userId: string) {
+    this.fetchPosts(userId)
+  }
+
+  toggleMenu(index: number) {
+    this.activeMenuIndex = this.activeMenuIndex === index ? null : index;
+  }
+
 }

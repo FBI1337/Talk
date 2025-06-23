@@ -17,14 +17,18 @@ export class CommentFeedComponent implements OnInit{
   constructor(private profileService: ProfileService) {}
 
   ngOnInit(): void {
+    this.refreshComments();
+  }
+
+  refreshComments() {
     this.profileService.getCommentsPost(this.postId).subscribe({
       next: (res) => {
-        this.comments = res;
+        this.comments = res
       },
       error: (err) => {
-        console.error('Ошибка при загрузке комментариев: ', err)
+        console.error('Ошибка при обновлении комментариев: ', err);
       }
-    })
+    });
   }
   
 }

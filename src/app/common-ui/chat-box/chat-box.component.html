@@ -1,14 +1,13 @@
 <div class="chat-box" *ngIf="selectedUser">
   <!-- Верхняя панель с именем и аватаром -->
   <div class="chat-header">
-    <img [src]="selectedUser.avatarUrl || defaultAvatar" alt="Аватар" class="avatar" />
+    <img [src]="'assets/imgs/avatar-placeholder.png'" alt="Аватар" class="avatar" />
     <div class="user-info">
       <div class="username">{{ selectedUser.username }}</div>
       <div class="status">в сети</div>
     </div>
   </div>
 
-  <!-- Список сообщений -->
   <div class="chat-messages">
     <div *ngFor="let message of messages" [ngClass]="{'my-message': message.senderId === currentUserId, 'other-message': message.senderId !== currentUserId}">
       <div class="message-content">
@@ -18,7 +17,6 @@
     </div>
   </div>
 
-  <!-- Поле ввода нового сообщения -->
   <div class="chat-input">
     <input
       type="text"
@@ -27,7 +25,7 @@
       (keyup.enter)="sendMessage()"
     />
     <button (click)="sendMessage()" [disabled]="!newMessage.trim()">
-      ➤
+      <svg icon="plane"></svg>
     </button>
   </div>
 </div>

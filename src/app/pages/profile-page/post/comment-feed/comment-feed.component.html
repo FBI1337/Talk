@@ -2,4 +2,4 @@
     <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
 </div>
 
-<app-comment-input [postId]="postId"></app-comment-input>
+<app-comment-input [postId]="postId" (commentAdded)="refreshComments()"></app-comment-input>

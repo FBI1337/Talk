@@ -47,6 +47,11 @@
             </div>
             <h3 class="h6 mb16"> О себе</h3>
             <p class="medium-text">{{ profile.description }}</p>
+
+
+            @if (isOwnProfile$ | async) {
+                <h3 class="h6 mt16">Подписано на вас <span>{{ profile.subscribersAmount}} человек(-а)</span></h3>
+            }
         </div>
 
 

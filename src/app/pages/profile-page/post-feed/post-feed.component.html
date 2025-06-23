@@ -1,5 +1,9 @@
-<div class="mb16">
-    <app-post-input></app-post-input>
-</div>
+
+
+@if (isOwnProfile$ | async) {
+    <div class="mb16">
+        <app-post-input (postCreated)="onPostCreated()"></app-post-input>
+    </div>
+}
 
 <app-post></app-post>

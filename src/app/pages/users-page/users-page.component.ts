@@ -93,4 +93,28 @@ export class UsersPageComponent implements OnInit {
   isOnline(user: AdminUser): boolean {
     return user.isActive;
   }
+
+
+  deleteAccount(user: AdminUser): void {
+    if (confirm(`Удалить аккаунт ${user.firstName} ${user.lastName}?`)) {
+      this.adminService.deleteUser(user._id).subscribe(() => this.loadUsers());
+    }
+  }
+
+
+  changeAdminLevel(user: AdminUser): void {
+    let newRole: string | null = null;
+
+    if (user.role === 'user') newRole = 'admin1';
+    else if (user.role === 'admin1') newRole = 'admin2';
+    else if (user.role === 'admin2') newRole = 'admin1';
+
+    if (newRole) {
+      this.adminService.setRole(user._id, newRole).subscribe(() => this.loadUsers())
+    }
+  }
+
+  removeAdmin(user: AdminUser): void {
+    this.adminService.setRole(user._id, 'user').subscribe(() => this.loadUsers());
+  }
 }

@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SvgIconComponent } from 'src/app/common-ui/svg-icon/svg-icon.component';
 import { ProfileService } from 'src/app/data/services/profile.service';
@@ -11,6 +11,8 @@ import { ProfileService } from 'src/app/data/services/profile.service';
   styleUrl: './comment-input.component.scss'
 })
 export class CommentInputComponent {
+
+  @Output() commentAdded = new EventEmitter<void>();
 
   @Input() postId!: string;
 
@@ -34,6 +36,7 @@ export class CommentInputComponent {
       next: () => {
         this.commentText = '';
         this.isSending = false;
+        this.commentAdded.emit();
       }, 
       error: (err) => {
         console.error('Ошибка при добавлении комментария: ', err);

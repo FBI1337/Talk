@@ -81,16 +81,16 @@ export class SidebarComponent {
                         icon: 'users',
                         link: '/admin/users'
                     },
-                    {
-                        label: 'Логи',
-                        icon: 'logs',
-                        link: '/admin/logs'
-                    },
-                    {
-                        label: 'База данных',
-                        icon: 'database',
-                        link: '/admin/database'
-                    }
+                    // {
+                    //     label: 'Логи',
+                    //     icon: 'logs',
+                    //     link: '/admin/logs'
+                    // },
+                    // {
+                    //     label: 'База данных',
+                    //     icon: 'database',
+                    //     link: '/admin/database'
+                    // }
                 ];
             }
         });

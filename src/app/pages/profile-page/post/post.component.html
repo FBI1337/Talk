@@ -23,8 +23,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="svg-btn">
-                        <svg icon="ellipsis"></svg>
+                    @if (isOwnProfile$ | async) {
+                        <div class="svg-btn" (click)="toggleMenu(i)">
+                            <svg icon="ellipsis"></svg>
+                        </div>
+
+                    }
+                    <div class="dropdown-menu regular-bold" *ngIf="activeMenuIndex === i">
+                        <button (click)="deletePost(post._id)"><span><svg icon="bin"></svg></span>Удалить</button>
                     </div>
                 </div>
 

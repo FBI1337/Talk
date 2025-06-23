@@ -12,6 +12,7 @@ export interface Profile {
     city: string,
     isActive: boolean,
     subscribersAmount: number,
+    followers: string[],
     frozenUntil: Date | null
 }
         

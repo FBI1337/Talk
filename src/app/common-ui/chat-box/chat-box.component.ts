@@ -3,10 +3,11 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { io } from 'socket.io-client';
 import { ProfileService } from 'src/app/data/services/profile.service';
+import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 
 @Component({
   selector: 'app-chat-box',
-  imports: [ FormsModule, NgClass, NgIf, NgFor, DatePipe],
+  imports: [ FormsModule, NgClass, NgIf, NgFor, DatePipe, SvgIconComponent],
   standalone: true,
   templateUrl: './chat-box.component.html',
   styleUrl: './chat-box.component.scss'
@@ -16,7 +17,7 @@ export class ChatBoxComponent implements OnChanges{
   defaultAvatar: string = 'assets/imgs/avatar-placeholder.png';
 
   @Input() selectedUser: any; 
-  currentUserId = '...';
+  currentUserId = localStorage.getItem('userId') ?? '';
   chatId = '';
   messages: any[] = [];
   newMessage = '';
@@ -38,6 +39,11 @@ export class ChatBoxComponent implements OnChanges{
   }
 
   startOrLoadChat() {
+
+    console.log('Создаю чат:', {
+      senderId: this.currentUserId,
+      receiverId: this.selectedUser?._id
+    })
     this.profileveService
     .createOrGetChat(this.currentUserId, this.selectedUser._id)
     .subscribe((chat: any) => {

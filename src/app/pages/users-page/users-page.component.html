@@ -55,6 +55,22 @@
       [disabled]="currentUserRole === 'admin1'">
       {{ user.isBanned ? 'Разбанить' : 'Забанить'}}
       </button>
+
+      <ng-container *ngIf="currentUserRole === 'admin2'">
+        <button (click)="deleteAccount(user)">
+          Удалить аккаунт
+        </button>
+        <button (click)="changeAdminLevel(user)">
+          {{
+            user.role === 'user' ? 'Выдать адм.'
+            : user.role === 'admin1' ? 'Повысить адм.'
+            : 'Понизить адм.'
+          }}
+        </button>
+        <button *ngIf="user.role !== 'user'" (click)="removeAdmin(user)">
+          Снять адм.
+        </button>
+      </ng-container>
     </div>
   </div>
 </div>

@@ -30,5 +30,13 @@ export class AdminService {
     unbanUser(id: string): Observable<any> {
         return this.http.post(`${this.baseApiUrl}admin/unban/${id}`, {});
     }
+
+    setRole(id: string, role: string): Observable<any> {
+        return this.http.post(`${this.baseApiUrl}admin/set-role/${id}`, { role });
+    }
+
+    deleteUser(id: string): Observable<any> {
+        return this.http.delete(`${this.baseApiUrl}admin/delete/${id}`);
+    }
 }
 

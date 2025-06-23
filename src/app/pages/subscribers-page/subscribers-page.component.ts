@@ -2,12 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Profile } from 'src/app/data/intefaces/profile.interface';
 import { ProfileService } from 'src/app/data/services/profile.service';
-import { ImgUrlPipe } from 'src/app/helpers/pipes/img-url.pipe';
 
 @Component({
   selector: 'app-subscribers-page',
   standalone: true,
-  imports: [ ImgUrlPipe, CommonModule],
+  imports: [  CommonModule],
   templateUrl: './subscribers-page.component.html',
   styleUrl: './subscribers-page.component.scss'
 })

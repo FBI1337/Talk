@@ -86,11 +86,22 @@
     </div>
 
     <div class="profile-btn mr32">
-      <button class="go-profile">
-        <svg icon="rightuparrow"></svg>
-      </button>
-      <button>123</button>
-      <button>123</button>
+
+      <ng-container *ngIf="isSubscribed(user); else notSubscribed">
+        <button class="subscriber-btn" (click)="unfollow(user._id)"><svg icon="subscriber"></svg></button>
+        <button class="write-btn text-buttons">Написать <span class="svg-line"><svg icon="plane"></svg></span></button>
+        <button class="go-profile-btn" (click)="goToProfile(user)">
+          <svg icon="rightuparrow"></svg>
+        </button>
+      </ng-container>
+
+      <ng-template #notSubscribed>
+        <button class="subscribe-btn text-buttons" (click)="follow(user._id)">Подписаться <span class="svg-line"><svg icon="subscribe"></svg></span></button>
+
+        <button class="go-profile-btn" (click)="goToProfile(user)">
+          <svg icon="rightuparrow"></svg>
+        </button>
+      </ng-template>
     </div>
   </div>
 </ul>

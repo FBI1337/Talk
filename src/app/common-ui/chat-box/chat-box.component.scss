@@ -3,14 +3,12 @@
   flex-direction: column;
   height: 100%;
   border-left: 1px solid #ddd;
-  background-color: var(--dark-color);
 
   .chat-header {
     display: flex;
     align-items: center;
     padding: 12px 16px;
     border-bottom: 1px solid #eee;
-    background-color: var(--dark-color);
 
     .avatar {
       width: 40px;
@@ -53,7 +51,7 @@
 
       .timestamp {
         font-size: 11px;
-        color: #888;
+        color: var(--dark-color);
         margin-top: 4px;
         text-align: right;
       }
@@ -61,12 +59,14 @@
 
     .my-message {
       align-self: flex-end;
-      background-color: #dcf8c6;
+      background-color: var(--primary-color);
+      color: var(--dark-color);
     }
 
     .other-message {
       align-self: flex-start;
-      background-color: #f1f0f0;
+      background-color: var(--primary-color);
+      color: var(--dark-color);
     }
   }
 
@@ -74,37 +74,51 @@
     display: flex;
     align-items: center;
     padding: 12px 16px;
-    border-top: 1px solid #eee;
+    border: 1px solid #eee;
     background-color: var(--dark-color);
 
     input {
       flex: 1;
       padding: 10px 14px;
       font-size: 14px;
-      border: 1px solid #ccc;
+      border: none;
+      border-bottom: 1px solid var(--light-color);
       background-color: var(--dark-color);
       color: var(--light-color);
-      border-radius: 20px;
       outline: none;
 
       &:focus {
-        border-color: #2196f3;
+        outline: none;
+        border-bottom: 1px solid var(--primary-color);
       }
     }
 
     button {
       margin-left: 8px;
       padding: 8px 14px;
-      background-color: #2196f3;
-      color: white;
+      background-color: var(--primary-color);
+      color: var(--light-color);
       border: none;
-      border-radius: 50%;
       font-size: 16px;
       cursor: pointer;
+      display: flex;
+      width: 40px;
+      height: 40px;
+      align-items: center;
 
       &:disabled {
-        background-color: #b0c4de;
+        background-color: var(--dark-primary-color);
+        color: var(--light-transparent-color);
+        display: flex;
+        width: 40px;
+        height: 40px;
+        align-items: center;
         cursor: default;
+      }
+
+      svg {
+        width: 16px;
+        height: 16px;
       }
     }
   }
