@@ -89,7 +89,7 @@
 
       <ng-container *ngIf="isSubscribed(user); else notSubscribed">
         <button class="subscriber-btn" (click)="unfollow(user._id)"><svg icon="subscriber"></svg></button>
-        <button class="write-btn text-buttons">Написать <span class="svg-line"><svg icon="plane"></svg></span></button>
+        <!-- <button class="write-btn text-buttons">Написать <span class="svg-line"><svg icon="plane"></svg></span></button> -->
         <button class="go-profile-btn" (click)="goToProfile(user)">
           <svg icon="rightuparrow"></svg>
         </button>
