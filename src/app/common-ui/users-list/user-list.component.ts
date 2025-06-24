@@ -22,7 +22,7 @@ export class UserListComponent implements OnInit{
 
     this.currentUserId = localStorage.getItem('userId');
     if (this.currentUserId) {
-      this.profileservice.getMySubscribersShortList(3).subscribe({
+      this.profileservice.getMySubscribersShortList(10).subscribe({
         next: (res) => {
           console.log('Подписчики: ', res)
           this.users = res.map(user => ({
